@@ -8,7 +8,10 @@ const AuthorizationForm = () => {
         <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
           <LoginAnimation />
         </div>
-        <div className="col-12 col-md-6 mt-3 mt-md-0">форма</div>
+      <div className="card-footer d-flex justify-content-center">
+        <p>
+          Нет аккаунта? <a href="/"> Регистрация</a>
+        </p>
       </div>
       <div className="card-footer"></div>
     </div>
