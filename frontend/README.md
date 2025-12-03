@@ -1,1 +1,0 @@
-[Деплой](https://frontend-project-12-lmlc.onrender.com/)
