@@ -1,10 +1,10 @@
 import Lottie from 'lottie-react'
 import loginAnimationData from '../../assets/lootie/login.json'
 
-const LoginAnimation = () => {
+const AuthorizationAnimation = () => {
   return (
     <Lottie animationData={loginAnimationData} loop={true} autoplay={true} />
   )
 }
 
-export default LoginAnimation
+export default AuthorizationAnimation
