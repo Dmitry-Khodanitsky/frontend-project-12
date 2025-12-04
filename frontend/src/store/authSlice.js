@@ -25,7 +25,11 @@ const authSlice = createSlice({
     error: null,
     isLoading: false,
   },
-  reducers: {},
+  reducers: {
+    logOut: (state) => {
+      state.token = localStorage.removeItem('token')
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAuthToken.pending, (state) => {
@@ -53,5 +57,6 @@ const authSlice = createSlice({
 
 export default authSlice.reducer
 
+export const { logOut } = authSlice.actions
 export const selectToken = (state) => state.auth.token
 export const selectError = (state) => state.auth.error
