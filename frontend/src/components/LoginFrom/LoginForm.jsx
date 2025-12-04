@@ -1,36 +1,46 @@
 import { Formik, Form, Field } from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchAuthToken, selectToken, selectError } from '../../store/authSlice'
+import { useNavigate } from 'react-router'
+import { useEffect } from 'react'
 
 const LoginForm = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const token = useSelector(selectToken)
+  const error = useSelector(selectError)
+
+  const handleSubmit = (values) => {
+    dispatch(fetchAuthToken(values))
+  }
+
+  useEffect(() => {
+    if (token) {
+      navigate('/', { replace: true })
+    }
+  }, [token])
+
   return (
     <Formik
       initialValues={{
         username: '',
         password: '',
       }}
-      validate={(values) => {
-        const errors = {}
-        if (values.username === '1' || values.password === '1') {
-          errors.username = 'Неверный имя пользователя или пароль'
-          errors.password = 'Неверный имя пользователя или пароль'
-        }
-
-        return errors
-      }}
       onSubmit={(values) => {
-        console.log('Данные отправлены', values)
+        handleSubmit(values)
       }}
     >
-      {({ errors, touched }) => (
+      {() => (
         <Form className="col-12 col-md-6 mt-3 mt-md-0">
           <h2 className="text-center mb-4">Войти</h2>
           <div className="form-floating mb-3">
             <Field
               required
-              autoComplete="nickame"
+              autoComplete="username"
               id="username"
               name="username"
               placeholder="Ваш ник"
-              className={`form-control ${errors.username ? 'is-invalid' : ''}`}
+              className={`form-control ${error ? 'is-invalid' : ''}`}
             ></Field>
             <label htmlFor="username">Ваш ник</label>
           </div>
@@ -42,11 +52,13 @@ const LoginForm = () => {
               name="password"
               type="password"
               placeholder="Пароль"
-              className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+              className={`form-control ${error ? 'is-invalid' : ''}`}
             ></Field>
             <label htmlFor="password">Пароль</label>
-            {errors.password && (
-              <div className="invalid-tooltip">{errors.password}</div>
+            {error && (
+              <div className="invalid-tooltip">
+                'Неверный имя пользователя или пароль'
+              </div>
             )}
           </div>
 
