@@ -5,7 +5,6 @@ import store from './store/index.js'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import './index.css'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>
