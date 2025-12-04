@@ -1,6 +1,10 @@
 import { Container } from 'react-bootstrap'
 
 const BaseLayout = ({ children }) => {
+  useEffect(() => {
+    document.documentElement.setAttribute('data-bs-theme', 'dark')
+  }, [])
+
   return (
     <Container
       fluid
