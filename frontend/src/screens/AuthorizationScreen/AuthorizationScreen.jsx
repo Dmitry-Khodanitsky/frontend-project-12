@@ -3,9 +3,9 @@ import AuthorizationAnimation from './AuthorizationAnimation'
 
 const AuthorizationScreen = () => {
   return (
-    <div className="card">
+    <div className="card col-12 col-md-8 col-xxl-6">
       <div className="card-body row p-5">
-        <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
+        <div className="col-12 col-md-6 d-flex align-items-center justify-content-center ">
           <AuthorizationAnimation />
         </div>
         <LoginForm />
