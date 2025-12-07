@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <Navbar className="border-bottom">
       <Container>
-        <Navbar.Brand className="d-none d-sm-flex">СВЯЗЬ</Navbar.Brand>
+        <Navbar.Brand className="d-none d-sm-flex">СВЯЗЬ 🤙</Navbar.Brand>
         <button className="d-flex d-sm-none">⏮️</button>
 
         {token && <LogOutButton />}
