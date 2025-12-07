@@ -1,5 +1,5 @@
 import Lottie from 'lottie-react'
-import loginAnimationData from '../../assets/lootie/login.json'
+import loginAnimationData from '../../assets/lootie/shaka.json'
 
 const AuthorizationAnimation = () => {
   return (
