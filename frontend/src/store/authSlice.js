@@ -47,6 +47,7 @@ const authSlice = createSlice({
         state.user = user
         state.token = token
         state.isLoading = false
+        console.log('Пользователь после логина:', username)
         if (token) {
           localStorage.setItem('token', token)
         }
