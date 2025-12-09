@@ -59,5 +59,6 @@ const authSlice = createSlice({
 export default authSlice.reducer
 
 export const { logOut } = authSlice.actions
+export const selectCurrentUser = (state) => state.auth.username
 export const selectToken = (state) => state.auth.token
 export const selectError = (state) => state.auth.error
