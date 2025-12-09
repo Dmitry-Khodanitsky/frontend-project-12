@@ -9,7 +9,6 @@ export const fetchAuthToken = createAsyncThunk(
         username,
         password,
       })
-      console.log(response.data) // удалить в проде
       return response.data
     } catch (error) {
       return rejectWithValue(error.response.statusText)
@@ -20,7 +19,7 @@ export const fetchAuthToken = createAsyncThunk(
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    user: null,
+    username: null,
     token: localStorage.getItem('token'),
     error: null,
     isLoading: false,
@@ -39,12 +38,11 @@ const authSlice = createSlice({
       .addCase(fetchAuthToken.rejected, (state, action) => {
         state.error = action.payload
         state.isLoading = false
-        console.log(current(state))
       })
       .addCase(fetchAuthToken.fulfilled, (state, action) => {
-        const { user, token } = action.payload
+        const { username, token } = action.payload
         state.error = null
-        state.user = user
+        state.username = username
         state.token = token
         state.isLoading = false
         console.log('Пользователь после логина:', username)
