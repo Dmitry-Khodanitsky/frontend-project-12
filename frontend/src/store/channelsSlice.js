@@ -37,7 +37,7 @@ const channelsSlice = createSlice({
       .addCase(fetchChannels.fulfilled, (state, action) => {
         state.channels = action.payload
         state.isLoading = false
-        console.log('Fulfiled channels: ', current(state))
+      
       })
   },
 })
