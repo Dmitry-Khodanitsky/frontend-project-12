@@ -18,7 +18,7 @@ const LoginForm = () => {
     if (token) {
       navigate('/', { replace: true })
     }
-  }, [token])
+  }, [token, navigate])
 
   return (
     <Formik
@@ -57,7 +57,7 @@ const LoginForm = () => {
             <label htmlFor="password">Пароль</label>
             {error && (
               <div className="invalid-tooltip">
-                'Неверный имя пользователя или пароль'
+                Неверный имя пользователя или пароль
               </div>
             )}
           </div>

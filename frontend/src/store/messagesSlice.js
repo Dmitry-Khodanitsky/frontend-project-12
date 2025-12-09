@@ -36,7 +36,7 @@ const messagesSlice = createSlice({
         state.error = action.payload
         state.isLoading = false
       })
-      .addCase(fetchMessages.fulfilled, (state, action) => {
+      .addCase(fetchMessages.fulfilled, (state) => {
         //state.messages = action.payload
         state.isLoading = false
         console.log('Fulfiled messages: ', current(state))
