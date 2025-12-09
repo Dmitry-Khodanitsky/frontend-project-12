@@ -5,7 +5,7 @@ const ChannelItem = ({ id, children }) => {
       <Nav.Link
         eventKey={id}
         className="rounded-0"
-        style={{ '--bs-nav-pills-link-active-bg': '#565656ff' }}
+        style={{ '--bs-nav-pills-link-active-bg': '#1a1d20' }}
       >
         {children}
       </Nav.Link>
