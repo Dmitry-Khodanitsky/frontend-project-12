@@ -45,5 +45,6 @@ const channelsSlice = createSlice({
 export default channelsSlice.reducer
 export const { setActualChannel } = channelsSlice.actions
 export const selectChannels = (state) => state.channels.channels
-export const selectActualChannel = (state) => state.channels.actualChannel
+export const selectChannelById = (channelId) => 
+  (state) => state.channels.channels.find(channel => channel.id === channelId)
 export const selectError = (state) => state.channels.error
