@@ -15,10 +15,16 @@ const MainScreen = () => {
 
   return (
     <Container fluid className="vh-100 p-0">
-      <div className="d-flex h-100">
-        <ChannelsList />
-        <ConversationSection />
-      </div>
+      <Tab.Container
+        id="main-screen"
+        defaultActiveKey={activeChannelId}
+        onSelect={setActiveChannelId}
+      >
+        <div className="d-flex h-100">
+          <ChannelsList />
+          <ConversationSection channelId={activeChannelId} />
+        </div>
+      </Tab.Container>
     </Container>
   )
 }
