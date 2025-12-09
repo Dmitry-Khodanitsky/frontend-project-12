@@ -6,7 +6,7 @@ import {
   selectMessagesByChannelId,
 } from '../../store/messagesSlice'
 import { selectChannels } from '../../store/channelsSlice'
-import MessageItem from './messageItem'
+import MessageItem from './MessageItem'
 import { useDispatch, useSelector } from 'react-redux'
 
 const MessagesList = ({ channelId }) => {
