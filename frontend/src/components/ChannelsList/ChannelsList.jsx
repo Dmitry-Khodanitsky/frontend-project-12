@@ -1,10 +1,11 @@
 import { useEffect } from 'react'
+import { Nav } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectChannels } from '../../store/channelsSlice'
-import { fetchChannels } from '../../store/channelsSlice'
+import { selectChannels, fetchChannels} from '../../store/channelsSlice'
+
 import { selectToken } from '../../store/authSlice'
 import SectionTitle from '../SectionTitle/SectionTitle'
-import ChanelItem from './ChannelItem'
+import ChannelItem from './ChannelItem'
 
 const ChannelsList = () => {
   const channels = useSelector(selectChannels)
@@ -13,7 +14,7 @@ const ChannelsList = () => {
 
   useEffect(() => {
     dispatch(fetchChannels(token))
-  }, [])
+  }, [token])
 
   return (
     <aside
@@ -24,11 +25,15 @@ const ChannelsList = () => {
       }}
     >
       <SectionTitle name="Каналы" isEditable={true} />
-      <ul className="nav flex-column nav-pills nav-fill mb-3 overflow-auto h-100 d-block">
+      <Nav variant="pills" className="flex-column">
         {channels.map((channel) => {
-          return <li key={channel.id}><ChanelItem name={channel.name}/></li>
+          return (
+            <ChannelItem key={channel.id} id={channel.id}>
+              {channel.removable ? channel.name : `# ${channel.name}`}
+            </ChannelItem>
+          )
         })}
-      </ul>
+      </Nav>
     </aside>
   )
 }
