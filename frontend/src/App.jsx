@@ -3,16 +3,19 @@ import BaseLayout from './layouts/BaseLayout/BaseLayout'
 import AuthorizationScreen from './screens/AuthorizationScreen/AuthorizationScreen'
 import MainScreen from './screens/MainScreen/MainScreen'
 import NotFoundScreen from './screens/NotFoundScreen/NotFoundScreen'
+import { ActiveChannelIdProvider } from './context/channelProvider'
 
 function App() {
   return (
-    <BaseLayout>
-      <Routes>
-        <Route path="/login" element={<AuthorizationScreen />} />
-        <Route path="/" element={<MainScreen />} />
-        <Route path="*" element={<NotFoundScreen />} />
-      </Routes>
-    </BaseLayout>
+    <ActiveChannelIdProvider>
+      <BaseLayout>
+        <Routes>
+          <Route path="/login" element={<AuthorizationScreen />} />
+          <Route path="/" element={<MainScreen />} />
+          <Route path="*" element={<NotFoundScreen />} />
+        </Routes>
+      </BaseLayout>
+    </ActiveChannelIdProvider>
   )
 }
 
