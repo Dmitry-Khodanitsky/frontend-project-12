@@ -47,4 +47,6 @@ const messagesSlice = createSlice({
 export default messagesSlice.reducer
 
 export const selectMessages = (state) => state.messages.messages
+export const selectMessagesByChannelId = (channelId) => (state) =>
+  state.messages.messages.filter((message) => message.channelId === channelId)
 export const selectError = (state) => state.messages.error
