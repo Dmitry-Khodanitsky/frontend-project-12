@@ -4,6 +4,7 @@ import { selectToken } from '../../store/authSlice'
 import { useEffect, useContext } from 'react'
 import { Tab } from 'react-bootstrap'
 import MessagesList from './MessagesList'
+import MessageTextarea from './MessageTextarea'
 import { fetchMessages } from '../../store/messagesSlice'
 import { ActiveChannelIdContext } from '../../context/channelContext'
 import { selectChannelById } from '../../store/channelsSlice'
@@ -23,17 +24,22 @@ const ConversationSection = () => {
   }, [token])
 
   return (
-    <section className="w-100">
+    <div className="d-flex flex-column h-100 w-100">
       <SectionTitle
         name={selectedChannel ? channelName : 'Выберите канал'}
         isEditable={false}
       />
-      <div className="p-3">
-        <Tab.Content>
+
+      <div className="flex-grow-1 overflow-hidden position-relative">
+        <div className="position-absolute top-0 bottom-0 start-0 end-0 overflow-auto p-3">
           <MessagesList channelId={activeChannelId} />
-        </Tab.Content>
+        </div>
       </div>
-    </section>
+
+      <div className="p-3 pt-0">
+        <MessageTextarea channel={selectedChannel} />
+      </div>
+    </div>
   )
 }
 
