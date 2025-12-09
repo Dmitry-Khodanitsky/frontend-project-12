@@ -11,7 +11,7 @@ import { ActiveChannelIdContext } from '../../context/channelContext'
 
 const MainScreen = () => {
   const token = useSelector(selectToken)
-  const {activeChannelId, setActiveChannelId} = useContext(
+  const { activeChannelId, setActiveChannelId } = useContext(
     ActiveChannelIdContext
   )
 
@@ -28,7 +28,7 @@ const MainScreen = () => {
       >
         <div className="d-flex h-100">
           <ChannelsList />
-          <ConversationSection channelId={activeChannelId} />
+          <ConversationSection />
         </div>
       </Tab.Container>
     </Container>
