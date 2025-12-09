@@ -17,12 +17,26 @@ export const fetchMessages = createAsyncThunk(
   }
 )
 
+export const sendMessage = createAsyncThunk(
+  'messages/sendMessage',
+  async ({ token, newMessage }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post('/api/v1/messages', newMessage, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      return response.data
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message)
+    }
+  }
+)
+
 const messagesSlice = createSlice({
   name: 'messages',
   initialState: {
-    messages: [
-      { id: '1', body: 'text message', channelId: '1', username: 'admin ' },
-    ],
+    messages: [],
     error: null,
     isLoading: false,
   },
@@ -36,10 +50,16 @@ const messagesSlice = createSlice({
         state.error = action.payload
         state.isLoading = false
       })
-      .addCase(fetchMessages.fulfilled, (state) => {
-        //state.messages = action.payload
+      .addCase(fetchMessages.fulfilled, (state, action) => {
         state.isLoading = false
+        state.messages = action.payload
         console.log('Fulfiled messages: ', current(state))
+        console.log('API вернул сообщения:', action.payload)
+      })
+      .addCase(sendMessage.fulfilled, (state, action) => {
+        state.messages.push(action.payload)
+        state.isLoading = false
+        console.log('Fulfiled sendMessage: ', current(state))
       })
   },
 })
