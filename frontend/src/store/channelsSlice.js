@@ -23,13 +23,8 @@ const channelsSlice = createSlice({
     channels: [],
     error: null,
     isLoading: false,
-    actualChannel: '1',
   },
-  reducers: {
-    setActualChannel: (state, action) => {
-      state.actualChannel = action.payload
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchChannels.pending, (state) => {
