@@ -1,12 +1,16 @@
-import { Button } from 'react-bootstrap'
-
-const ChanelItem = ({ name }) => {
+import { Nav } from "react-bootstrap"
+const ChannelItem = ({ id, children }) => {
   return (
-    <Button type="button" variant="dark" className="w-100 rounded-0 text-start">
-      <span className="me-1">#</span>
-      {name}
-    </Button>
+    <Nav.Item>
+      <Nav.Link
+        eventKey={id}
+        className="rounded-0"
+        style={{ '--bs-nav-pills-link-active-bg': '#565656ff' }}
+      >
+        {children}
+      </Nav.Link>
+    </Nav.Item>
   )
 }
 
-export default ChanelItem
+export default ChannelItem
