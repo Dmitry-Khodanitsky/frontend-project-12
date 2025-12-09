@@ -20,7 +20,7 @@ const MainScreen = () => {
   }
 
   return (
-    <Container fluid className="vh-100 p-0">
+    <Container fluid className="h-100 p-0">
       <Tab.Container
         id="main-screen"
         defaultActiveKey={activeChannelId}
