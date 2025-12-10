@@ -1,8 +1,7 @@
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router'
 import { selectToken } from '../../store/authSlice'
-import { Tab } from 'react-bootstrap'
-
+import { Tab, Container } from 'react-bootstrap'
 import ChannelsList from '../../components/ChannelsList/ChannelsList'
 import ConversationSection from '../../components/ConversationSection/ConversationSection'
 import { useState } from 'react'
@@ -10,9 +9,6 @@ import { useState } from 'react'
 const MainScreen = () => {
   const [activeChannelId, setActiveChannelId] = useState('1')
   const token = useSelector(selectToken)
-  const { activeChannelId, setActiveChannelId } = useContext(
-    ActiveChannelIdContext
-  )
 
   if (!token) {
     return <Navigate to="/login" state={{ from: location.pathname }} replace />
