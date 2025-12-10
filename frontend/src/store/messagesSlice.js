@@ -39,6 +39,7 @@ const messagesSlice = createSlice({
     messages: [],
     error: null,
     isLoading: false,
+    isSending: false
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -53,7 +54,6 @@ const messagesSlice = createSlice({
       .addCase(fetchMessages.fulfilled, (state, action) => {
         state.isLoading = false
         state.messages = action.payload
-        console.log('Fulfiled messages: ', current(state))
         console.log('API вернул сообщения:', action.payload)
       })
       .addCase(sendMessage.pending, (state) => {
@@ -66,7 +66,7 @@ const messagesSlice = createSlice({
       })
       .addCase(sendMessage.fulfilled, (state, action) => {
         state.messages.push(action.payload)
-        state.isLoading = false
+        state.isSending = false
         console.log('Fulfiled sendMessage: ', current(state))
       })
   },
@@ -78,3 +78,5 @@ export const selectMessages = (state) => state.messages.messages
 export const selectMessagesByChannelId = (channelId) => (state) =>
   state.messages.messages.filter((message) => message.channelId === channelId)
 export const selectError = (state) => state.messages.error
+export const selectLoading = (state) => state.messages.isLoading
+export const selectSending = (state) => state.messages.isSending
