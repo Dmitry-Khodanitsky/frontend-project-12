@@ -1,4 +1,4 @@
-import LoginForm from '../../components/LoginFrom/loginForm'
+import LoginForm from '../../components/LoginFrom/LoginForm'
 import AuthorizationAnimation from './AuthorizationAnimation'
 
 const AuthorizationScreen = () => {
