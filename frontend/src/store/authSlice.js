@@ -19,7 +19,7 @@ export const fetchAuthToken = createAsyncThunk(
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    username: null,
+    username: localStorage.getItem('username'),
     token: localStorage.getItem('token'),
     error: null,
     isLoading: false,
@@ -27,6 +27,7 @@ const authSlice = createSlice({
   reducers: {
     logOut: (state) => {
       state.token = localStorage.removeItem('token')
+      localStorage.removeItem('username')
     },
   },
   extraReducers: (builder) => {
@@ -48,6 +49,7 @@ const authSlice = createSlice({
         console.log('Пользователь после логина:', username)
         if (token) {
           localStorage.setItem('token', token)
+          localStorage.setItem('username', username)
         }
       })
     // добавить pending
