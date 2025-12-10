@@ -1,14 +1,21 @@
 import { Formik, Form, Field } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchAuthToken, selectToken, selectError } from '../../store/authSlice'
+import {
+  fetchAuthToken,
+  selectToken,
+  selectError,
+  selectLoading,
+} from '../../store/authSlice'
 import { useNavigate } from 'react-router'
 import { useEffect } from 'react'
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 
 const LoginForm = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const token = useSelector(selectToken)
   const error = useSelector(selectError)
+  const isLoading = useSelector(selectLoading)
 
   const handleSubmit = (values) => {
     dispatch(fetchAuthToken(values))
@@ -63,7 +70,7 @@ const LoginForm = () => {
           </div>
 
           <button type="submit" className="w-100 mb-3 btn btn-outline-primary">
-            Войти
+            {isLoading ? <LoadingSpinner /> : 'Войти'}
           </button>
         </Form>
       )}
