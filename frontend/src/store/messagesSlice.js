@@ -56,6 +56,14 @@ const messagesSlice = createSlice({
         console.log('Fulfiled messages: ', current(state))
         console.log('API вернул сообщения:', action.payload)
       })
+      .addCase(sendMessage.pending, (state) => {
+        state.error = null
+        state.isSending = true
+      })
+      .addCase(sendMessage.rejected, (state, action) => {
+        state.error = action.payload
+        state.isSending = false
+      })
       .addCase(sendMessage.fulfilled, (state, action) => {
         state.messages.push(action.payload)
         state.isLoading = false
