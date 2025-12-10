@@ -7,10 +7,9 @@ import MessageTextarea from './MessageTextarea'
 import { fetchMessages } from '../../store/messagesSlice'
 import { selectChannelById } from '../../store/channelsSlice'
 
-const ConversationSection = () => {
+const ConversationSection = ({ activeChannelId }) => {
   const dispatch = useDispatch()
   const token = useSelector(selectToken)
-  const { activeChannelId } = useContext(ActiveChannelIdContext)
   const selectedChannel = useSelector(selectChannelById(activeChannelId))
 
   const channelName = selectedChannel?.removable
