@@ -28,7 +28,7 @@ const MainScreen = () => {
       >
         <div className="d-flex h-100">
           <ChannelsList />
-          <ConversationSection />
+          <ConversationSection activeChannelId={activeChannelId} />
         </div>
       </Tab.Container>
     </Container>
