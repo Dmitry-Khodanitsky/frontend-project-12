@@ -5,11 +5,10 @@ import { Tab } from 'react-bootstrap'
 
 import ChannelsList from '../../components/ChannelsList/ChannelsList'
 import ConversationSection from '../../components/ConversationSection/ConversationSection'
-import { Container } from 'react-bootstrap'
-import { useContext } from 'react'
-import { ActiveChannelIdContext } from '../../context/channelContext'
+import { useState } from 'react'
 
 const MainScreen = () => {
+  const [activeChannelId, setActiveChannelId] = useState('1')
   const token = useSelector(selectToken)
   const { activeChannelId, setActiveChannelId } = useContext(
     ActiveChannelIdContext
