@@ -2,12 +2,13 @@ import { Form, Button } from 'react-bootstrap'
 import { Formik, Field } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCurrentUser, selectToken } from '../../store/authSlice'
-import { sendMessage } from '../../store/messagesSlice'
+import { sendMessage, selectSending } from '../../store/messagesSlice'
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 
 const MessageTextarea = ({ channel }) => {
   const dispatch = useDispatch()
   const currentUser = useSelector(selectCurrentUser)
-  console.log('Текущий пользователь', currentUser)
+  const isSending = useSelector(selectSending)
   const token = useSelector(selectToken)
 
   if (!channel) return null
@@ -45,12 +46,13 @@ const MessageTextarea = ({ channel }) => {
               e.target.style.height = e.target.scrollHeight + 'px'
             }}
           />
+
           <Button
             type="submit"
             variant="outline-primary"
             disabled={!values.textarea.trim()} // неактивна если поле пустое или только пробелы
           >
-            Отправить
+            {isSending ? <LoadingSpinner /> : 'Отправить'}
           </Button>
         </Form>
       )}
