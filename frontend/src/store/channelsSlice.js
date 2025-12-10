@@ -48,3 +48,4 @@ export const selectChannels = (state) => state.channels.channels
 export const selectChannelById = (channelId) => 
   (state) => state.channels.channels.find(channel => channel.id === channelId)
 export const selectError = (state) => state.channels.error
+export const selectLoading = (state) => state.channels.isLoading
