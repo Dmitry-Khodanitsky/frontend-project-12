@@ -36,8 +36,8 @@ const channelsSlice = createSlice({
       })
       .addCase(fetchChannels.fulfilled, (state, action) => {
         state.channels = action.payload
+        state.error = null
         state.isLoading = false
-      
       })
   },
 })
