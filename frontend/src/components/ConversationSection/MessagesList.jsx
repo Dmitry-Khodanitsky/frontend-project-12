@@ -1,4 +1,3 @@
-import { Tab } from 'react-bootstrap'
 import { useEffect } from 'react'
 import { selectToken } from '../../store/authSlice'
 import {
@@ -12,18 +11,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../Loader/Loader'
 
 const MessagesList = ({ channelId }) => {
-
-  if (!channelId) return <h4>Кажется мы не смогли найти такой канал</h4>
   const token = useSelector(selectToken)
+  const dispatch = useDispatch()
+  const channelMessages = useSelector(selectMessagesByChannelId(channelId))
+  const isLoading = useSelector(selectLoading)
+  const error = useSelector(selectError)
 
   useEffect(() => {
     dispatch(fetchMessages(token))
   }, [token, channelId])
 
-  const dispatch = useDispatch()
-  const channelMessages = useSelector(selectMessagesByChannelId(channelId))
-  const isLoading = useSelector(selectLoading)
-  const error = useSelector(selectError)
+  if (!channelId) return <h4>Кажется мы не смогли найти такой канал</h4>
 
   if (error) {
     return <h4>Что-то пошло не так</h4>
