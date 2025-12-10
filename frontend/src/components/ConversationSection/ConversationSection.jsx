@@ -1,12 +1,10 @@
 import SectionTitle from '../SectionTitle/SectionTitle'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectToken } from '../../store/authSlice'
-import { useEffect, useContext } from 'react'
-import { Tab } from 'react-bootstrap'
+import { useEffect } from 'react'
 import MessagesList from './MessagesList'
 import MessageTextarea from './MessageTextarea'
 import { fetchMessages } from '../../store/messagesSlice'
-import { ActiveChannelIdContext } from '../../context/channelContext'
 import { selectChannelById } from '../../store/channelsSlice'
 
 const ConversationSection = () => {
