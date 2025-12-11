@@ -21,19 +21,18 @@ const ConversationSection = ({ activeChannelId }) => {
   }, [token])
 
   return (
-    <div className="d-flex flex-column h-100 w-100">
+    <div className="d-flex flex-column w-100">
       <SectionTitle
         name={selectedChannel ? channelName : 'Выберите канал'}
         isEditable={false}
       />
-
-      <div className="flex-grow-1 overflow-hidden position-relative">
-        <div className="position-absolute top-0 bottom-0 start-0 end-0 overflow-auto p-3">
+      <div className="flex-grow-1 overflow-hidden">
+        <div className="h-100 overflow-auto p-3">
           <MessagesList channelId={activeChannelId} />
         </div>
       </div>
 
-      <div className="p-3 pt-0">
+      <div className="flex-shrink-0 p-3 pt-0">
         <MessageTextarea channel={selectedChannel} />
       </div>
     </div>
