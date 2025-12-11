@@ -27,7 +27,10 @@ const MessageTextarea = ({ channel }) => {
       }}
     >
       {({ values, handleSubmit }) => (
-        <Form className="border border-2 rounded-3 p-3" onSubmit={handleSubmit}>
+        <Form
+          className="border border-2 rounded-3 p-3 overflow-auto"
+          onSubmit={handleSubmit}
+        >
           <Field
             style={{
               outline: 'none',
@@ -37,14 +40,9 @@ const MessageTextarea = ({ channel }) => {
             }}
             name="textarea"
             as="textarea"
+            rows="5"
             className="w-100 border border-0 bg-dark "
-            rows="4"
             placeholder={`Написать в ${channel.name}`}
-            // Изменение размера textarea в зависимости от количества строк текста
-            onInput={(e) => {
-              e.target.style.height = 'auto'
-              e.target.style.height = e.target.scrollHeight + 'px'
-            }}
           />
 
           <Button
