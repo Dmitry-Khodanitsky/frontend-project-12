@@ -23,13 +23,7 @@ const ChannelsList = () => {
   }, [token])
 
   return (
-    <aside
-      className="border-end"
-      style={{
-        width: '250px',
-        minWidth: '250px',
-      }}
-    >
+    <aside className="border-end" style={{ width: '20%', minWidth: '120px' }}>
       <SectionTitle name="Каналы" isEditable={true} />
       {isLoading ? (
         <Loader />
