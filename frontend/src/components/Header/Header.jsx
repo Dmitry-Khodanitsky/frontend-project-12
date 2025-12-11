@@ -8,12 +8,11 @@ const Header = () => {
 
   return (
     <Navbar className="border-bottom">
-      <Container>
+      <div className='d-flex justify-content-between w-100 ps-3 pe-3'>
         <Navbar.Brand className="d-none d-sm-flex">СВЯЗЬ 🤙</Navbar.Brand>
-        <button className="d-flex d-sm-none">⏮️</button>
 
         {token && <LogOutButton />}
-      </Container>
+      </div>
     </Navbar>
   )
 }
