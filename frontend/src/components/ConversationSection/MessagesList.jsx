@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { selectToken } from '../../store/authSlice'
 import {
   fetchMessages,
@@ -16,10 +16,18 @@ const MessagesList = ({ channelId }) => {
   const channelMessages = useSelector(selectMessagesByChannelId(channelId))
   const isLoading = useSelector(selectLoading)
   const error = useSelector(selectError)
+  const lastMessageRef = useRef(null)
 
   useEffect(() => {
     dispatch(fetchMessages(token))
   }, [token, channelId])
+
+  useEffect(() => {
+    // Cкролл к последнему сообщению
+    lastMessageRef.current?.scrollIntoView({
+      block: 'nearest',
+    })
+  }, [channelMessages])
 
   if (!channelId) return <h4>Кажется мы не смогли найти такой канал</h4>
 
@@ -40,6 +48,8 @@ const MessagesList = ({ channelId }) => {
           />
         ))
       )}
+      {/* якорь для автоматического скрола вниз к последнему сообщению */}
+      <div ref={lastMessageRef} className='scrollAnchor'/>
     </div>
   )
 }
