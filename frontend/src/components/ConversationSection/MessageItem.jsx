@@ -7,9 +7,9 @@ const MessageItem = ({ username, text }) => {
       >
         <b className="fs-4">{username[0]}</b>
       </div>
-      <div className="d-flex flex-column flex-wrap">
-        <b>{username}</b>
-        <p>{text}</p>
+      <div className="d-flex flex-column flex-grow-1">
+        <b className="text-break">{username}</b>
+        <p className="mb-0 text-break word-wrap-break-word">{text}</p>
       </div>
     </div>
   )
