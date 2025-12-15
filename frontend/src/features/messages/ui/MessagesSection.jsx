@@ -1,24 +1,15 @@
 import { SectionTitle } from '@/common/components'
-import { useDispatch, useSelector } from 'react-redux'
-import { selectToken } from '@/features/auth/model/authSlice'
-import { useEffect } from 'react'
 import MessagesList from './MessagesList'
 import MessageTextarea from './MessageTextarea'
-import { fetchMessages } from '@/store/messagesSlice'
-import { selectChannelById } from '@/store/channelsSlice'
+
+import { useSelectedChannel } from '@/common/hooks/useSelectedChannel'
 
 export const MessagesSection = ({ activeChannelId }) => {
-  const dispatch = useDispatch()
-  const token = useSelector(selectToken)
-  const selectedChannel = useSelector(selectChannelById(activeChannelId))
+  const selectedChannel = useSelectedChannel(activeChannelId)
 
   const channelName = selectedChannel?.removable
     ? selectedChannel?.name
     : `# ${selectedChannel?.name}`
-
-  useEffect(() => {
-    dispatch(fetchMessages(token))
-  }, [token])
 
   return (
     <div className="d-flex flex-column w-100">
