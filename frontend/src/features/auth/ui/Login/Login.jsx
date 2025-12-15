@@ -1,7 +1,16 @@
 import { LoginForm } from '@/common/components/'
+import { Navigate } from 'react-router'
 import LoginAnimation from './LoginAnimation'
+import { selectToken } from '@/store/authSlice'
+import { useSelector } from 'react-redux'
 
 export const Login = () => {
+  const token = useSelector(selectToken)
+
+  if (token) {
+    return <Navigate to="/" state={{ from: location.pathname }} replace />
+  }
+
   return (
     <div className="card col-12 col-md-8 col-xxl-6 align-self-center">
       <div className="card-body row p-5">
@@ -18,4 +27,3 @@ export const Login = () => {
     </div>
   )
 }
-
