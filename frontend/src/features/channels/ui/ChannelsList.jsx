@@ -1,25 +1,17 @@
-import { useEffect } from 'react'
 import { Nav } from 'react-bootstrap'
-import { useSelector, useDispatch } from 'react-redux'
-import {
-  selectChannels,
-  fetchChannels,
-  selectLoading,
-} from '@/store/channelsSlice'
-
-import { selectToken } from '@/features/auth/model/authSlice'
+import { useGetChannelsQuery } from '@/features/channels/api/channelsApi'
 import { SectionTitle, Loader } from '@/common/components'
 import ChannelItem from './ChannelItem'
 
 export const ChannelsList = () => {
-  const channels = useSelector(selectChannels)
-  const token = useSelector(selectToken)
-  const dispatch = useDispatch()
-  const isLoading = useSelector(selectLoading)
+  const { data: channels, isError, isLoading } = useGetChannelsQuery()
 
-  useEffect(() => {
-    dispatch(fetchChannels(token))
-  }, [token])
+  if (isError)
+    return (
+      <aside className="border-end" style={{ width: '20%', minWidth: '120px' }}>
+        <h1>Ошибка</h1>
+      </aside>
+    )
 
   return (
     <aside className="border-end" style={{ width: '20%', minWidth: '120px' }}>
@@ -40,4 +32,3 @@ export const ChannelsList = () => {
     </aside>
   )
 }
-
