@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router'
-import { selectToken } from '@/store/authSlice'
+import { selectToken } from '@/features/auth/model/authSlice'
 import { Tab, Container } from 'react-bootstrap'
 import { ChannelsList } from '@/features/channels/'
 import { MessagesSection } from '@/features/messages/'
