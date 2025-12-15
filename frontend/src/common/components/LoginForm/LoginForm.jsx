@@ -1,31 +1,22 @@
 import { Formik, Form, Field } from 'formik'
-import { useDispatch, useSelector } from 'react-redux'
-import {
-  fetchAuthToken,
-  selectToken,
-  selectError,
-  selectLoading,
-} from '@/store/authSlice'
+import { useLoginMutation } from '@/features/auth/'
 import { useNavigate } from 'react-router'
 import { useEffect } from 'react'
 import { LoadingSpinner } from '@/common/components'
 
 export const LoginForm = () => {
-  const dispatch = useDispatch()
   const navigate = useNavigate()
-  const token = useSelector(selectToken)
-  const error = useSelector(selectError)
-  const isLoading = useSelector(selectLoading)
-
-  const handleSubmit = (values) => {
-    dispatch(fetchAuthToken(values))
-  }
+  const [login, { isLoading, isError, isSuccess }] = useLoginMutation()
 
   useEffect(() => {
-    if (token) {
+    if (isSuccess) {
       navigate('/', { replace: true })
     }
-  }, [token, navigate])
+  }, [isSuccess, navigate])
+
+  const handleSubmit = (values) => {
+    login(values)
+  }
 
   return (
     <Formik
@@ -47,7 +38,7 @@ export const LoginForm = () => {
               id="username"
               name="username"
               placeholder="Ваш ник"
-              className={`form-control ${error ? 'is-invalid' : ''}`}
+              className={`form-control ${isError ? 'is-invalid' : ''}`}
             ></Field>
             <label htmlFor="username">Ваш ник</label>
           </div>
@@ -59,10 +50,10 @@ export const LoginForm = () => {
               name="password"
               type="password"
               placeholder="Пароль"
-              className={`form-control ${error ? 'is-invalid' : ''}`}
+              className={`form-control ${isError ? 'is-invalid' : ''}`}
             ></Field>
             <label htmlFor="password">Пароль</label>
-            {error && (
+            {isError && (
               <div className="invalid-tooltip">
                 Неверный имя пользователя или пароль
               </div>
