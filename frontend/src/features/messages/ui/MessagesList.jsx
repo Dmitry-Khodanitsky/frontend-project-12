@@ -1,26 +1,17 @@
 import { useEffect, useRef } from 'react'
-import { selectToken } from '@/store/authSlice'
-import {
-  fetchMessages,
-  selectError,
-  selectLoading,
-  selectMessagesByChannelId,
-} from '@/store/messagesSlice'
 import MessageItem from './MessageItem'
-import { useDispatch, useSelector } from 'react-redux'
 import { Loader } from '@/common/components/'
+import { useChannelMessages } from '@/common/hooks/useChannelMessages'
 
 const MessagesList = ({ channelId }) => {
-  const token = useSelector(selectToken)
-  const dispatch = useDispatch()
-  const channelMessages = useSelector(selectMessagesByChannelId(channelId))
-  const isLoading = useSelector(selectLoading)
-  const error = useSelector(selectError)
-  const lastMessageRef = useRef(null)
+  const { channelMessages, error, isLoading } = useChannelMessages(channelId)
 
-  useEffect(() => {
-    dispatch(fetchMessages(token))
-  }, [token, channelId])
+  const lastMessageRef = useRef(null)
+  console.log(channelMessages)
+
+  // useEffect(() => {
+  //   dispatch(fetchMessages(token))
+  // }, [token, channelId])
 
   useEffect(() => {
     // Cкролл к последнему сообщению
