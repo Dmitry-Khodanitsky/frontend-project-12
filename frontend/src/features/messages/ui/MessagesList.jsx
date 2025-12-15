@@ -7,11 +7,6 @@ const MessagesList = ({ channelId }) => {
   const { channelMessages, error, isLoading } = useChannelMessages(channelId)
 
   const lastMessageRef = useRef(null)
-  console.log(channelMessages)
-
-  // useEffect(() => {
-  //   dispatch(fetchMessages(token))
-  // }, [token, channelId])
 
   useEffect(() => {
     // Cкролл к последнему сообщению
