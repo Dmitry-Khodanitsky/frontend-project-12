@@ -1,17 +1,19 @@
 import { Form, Button } from 'react-bootstrap'
 import { Formik, Field } from 'formik'
-import { useDispatch, useSelector } from 'react-redux'
-import { selectCurrentUser, selectToken } from '@/store/authSlice'
-import { sendMessage, selectSending } from '@/store/messagesSlice'
-import {LoadingSpinner} from '@/common/components'
+import { useSelector } from 'react-redux'
+import { selectUser } from '@/features/auth/model/authSlice'
+import { LoadingSpinner } from '@/common/components'
+import { useSendMessageMutation } from '../api/messagesApi'
 
 const MessageTextarea = ({ channel }) => {
-  const dispatch = useDispatch()
-  const currentUser = useSelector(selectCurrentUser)
-  const isSending = useSelector(selectSending)
-  const token = useSelector(selectToken)
+  const [sendMessage, { error, isLoading: isSending }] =
+    useSendMessageMutation()
+
+  const currentUser = useSelector(selectUser)
+  console.log(currentUser)
 
   if (!channel) return null
+  // if (error) return что-либо
 
   return (
     <Formik
@@ -22,7 +24,7 @@ const MessageTextarea = ({ channel }) => {
           channelId: channel.id,
           username: currentUser,
         }
-        dispatch(sendMessage({ token, newMessage }))
+        sendMessage(newMessage)
         resetForm()
       }}
     >
