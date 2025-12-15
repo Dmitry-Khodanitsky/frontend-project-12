@@ -1,7 +1,7 @@
 import { LoginForm } from '@/common/components/'
 import LoginAnimation from './LoginAnimation'
 
-const Login = () => {
+export const Login = () => {
   return (
     <div className="card col-12 col-md-8 col-xxl-6 align-self-center">
       <div className="card-body row p-5">
@@ -19,4 +19,3 @@ const Login = () => {
   )
 }
 
-export default Login

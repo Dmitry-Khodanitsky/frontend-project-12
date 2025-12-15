@@ -2,8 +2,8 @@ import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router'
 import { selectToken } from '@/store/authSlice'
 import { Tab, Container } from 'react-bootstrap'
-import ChannelsList from '@/features/channels/ui/ChannelsList'
-import MessagesSection from '@/features/messages/ui/MessagesSection'
+import { ChannelsList } from '@/features/channels/'
+import { MessagesSection } from '@/features/messages/'
 import { useState } from 'react'
 
 export const MainPage = () => {

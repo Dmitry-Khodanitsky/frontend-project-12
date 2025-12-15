@@ -1,4 +1,4 @@
-import {SectionTitle} from '@/common/components'
+import { SectionTitle } from '@/common/components'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectToken } from '@/store/authSlice'
 import { useEffect } from 'react'
@@ -7,7 +7,7 @@ import MessageTextarea from './MessageTextarea'
 import { fetchMessages } from '@/store/messagesSlice'
 import { selectChannelById } from '@/store/channelsSlice'
 
-const ConversationSection = ({ activeChannelId }) => {
+export const MessagesSection = ({ activeChannelId }) => {
   const dispatch = useDispatch()
   const token = useSelector(selectToken)
   const selectedChannel = useSelector(selectChannelById(activeChannelId))
@@ -38,5 +38,3 @@ const ConversationSection = ({ activeChannelId }) => {
     </div>
   )
 }
-
-export default ConversationSection

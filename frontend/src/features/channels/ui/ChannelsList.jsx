@@ -8,11 +8,10 @@ import {
 } from '@/store/channelsSlice'
 
 import { selectToken } from '@/store/authSlice'
-import { SectionTitle } from '@/common/components'
+import { SectionTitle, Loader } from '@/common/components'
 import ChannelItem from './ChannelItem'
-import { Loader } from '@/common/components'
 
-const ChannelsList = () => {
+export const ChannelsList = () => {
   const channels = useSelector(selectChannels)
   const token = useSelector(selectToken)
   const dispatch = useDispatch()
@@ -42,4 +41,3 @@ const ChannelsList = () => {
   )
 }
 
-export default ChannelsList

@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router'
-import Login from '../../features/auth/ui/Login/Login'
-import { MainPage, NotFoundPage } from '../../pages'
+import { Login } from '@/features/auth'
+import { MainPage, NotFoundPage } from '@/pages'
 
 const Routing = () => {
   return (

@@ -8,7 +8,7 @@ import {
 } from '@/store/messagesSlice'
 import MessageItem from './MessageItem'
 import { useDispatch, useSelector } from 'react-redux'
-import {Loader} from '@/common/components/'
+import { Loader } from '@/common/components/'
 
 const MessagesList = ({ channelId }) => {
   const token = useSelector(selectToken)
@@ -49,7 +49,7 @@ const MessagesList = ({ channelId }) => {
         ))
       )}
       {/* якорь для автоматического скрола вниз к последнему сообщению */}
-      <div ref={lastMessageRef} className='scrollAnchor'/>
+      <div ref={lastMessageRef} className="scrollAnchor" />
     </div>
   )
 }
