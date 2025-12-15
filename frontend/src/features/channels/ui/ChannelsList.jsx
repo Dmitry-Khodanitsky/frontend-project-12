@@ -7,7 +7,7 @@ import {
   selectLoading,
 } from '@/store/channelsSlice'
 
-import { selectToken } from '@/store/authSlice'
+import { selectToken } from '@/features/auth/model/authSlice'
 import { SectionTitle, Loader } from '@/common/components'
 import ChannelItem from './ChannelItem'
 
