@@ -1,6 +1,6 @@
 import { SectionTitle } from '@/common/components'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectToken } from '@/store/authSlice'
+import { selectToken } from '@/features/auth/model/authSlice'
 import { useEffect } from 'react'
 import MessagesList from './MessagesList'
 import MessageTextarea from './MessageTextarea'
