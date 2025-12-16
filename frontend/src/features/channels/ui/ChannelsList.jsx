@@ -2,9 +2,11 @@ import { Nav } from 'react-bootstrap'
 import { useGetChannelsQuery } from '@/features/channels/api/channelsApi'
 import { SectionTitle, Loader } from '@/common/components'
 import ChannelItem from './ChannelItem'
+import {useScrollToLastElement} from '@/common/hooks'
 
 export const ChannelsList = () => {
   const { data: channels, isError, isLoading } = useGetChannelsQuery()
+  const lastMessageRef = useScrollToLastElement(channels)
 
   if (isError)
     return (
@@ -35,6 +37,8 @@ export const ChannelsList = () => {
               )
             })}
           </Nav>
+          {/* якорь для автоматического скрола вниз к последнему сообщению */}
+          <div ref={lastMessageRef} className="scrollAnchor" />
         </div>
       )}
     </aside>
