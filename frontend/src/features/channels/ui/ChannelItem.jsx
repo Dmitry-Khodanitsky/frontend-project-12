@@ -1,11 +1,12 @@
-import { Nav } from "react-bootstrap"
+import { Nav } from 'react-bootstrap'
 const ChannelItem = ({ id, children }) => {
   return (
     <Nav.Item>
       <Nav.Link
         eventKey={id}
-        className="rounded-0"
+        className="rounded-0 text-dark-emphasis"
         style={{ '--bs-nav-pills-link-active-bg': '#1a1d20' }}
+        
       >
         {children}
       </Nav.Link>
