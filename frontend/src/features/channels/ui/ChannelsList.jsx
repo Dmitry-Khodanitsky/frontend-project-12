@@ -2,11 +2,14 @@ import { Nav } from 'react-bootstrap'
 import { useGetChannelsQuery } from '@/features/channels/api/channelsApi'
 import { SectionTitle, Loader } from '@/common/components'
 import ChannelItem from './ChannelItem'
-import {useScrollToLastElement} from '@/common/hooks'
+import { useScrollTo } from '@/common/hooks'
+import { useContext } from 'react'
+import { ActiveChannelIdContext } from '@/pages/MainPage/model'
 
 export const ChannelsList = () => {
   const { data: channels, isError, isLoading } = useGetChannelsQuery()
-  const lastMessageRef = useScrollToLastElement(channels)
+  const { activeChannelId } = useContext(ActiveChannelIdContext)
+  const activeChannelRef = useScrollTo(activeChannelId)
 
   if (isError)
     return (
@@ -30,15 +33,17 @@ export const ChannelsList = () => {
             className="flex-column flex-grow-1 overflow-auto"
           >
             {channels.map((channel) => {
+              const ref =
+                channel.id === activeChannelId ? activeChannelRef : null
               return (
-                <ChannelItem key={channel.id} id={channel.id}>
+                <ChannelItem key={channel.id} id={channel.id} ref={ref}>
                   {`# ${channel.name}`}
                 </ChannelItem>
               )
             })}
           </Nav>
-          {/* якорь для автоматического скрола вниз к последнему сообщению */}
-          <div ref={lastMessageRef} className="scrollAnchor" />
+          {/* якорь для автоматического скрола вниз к активному каналу */}
+          {/* <div ref={lastMessageRef} className="scrollAnchor" /> */}
         </div>
       )}
     </aside>
