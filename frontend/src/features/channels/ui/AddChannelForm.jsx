@@ -47,8 +47,8 @@ export const AddChannelForm = ({ handleClose, visible }) => {
               )}
               <label htmlFor="name">Название канала</label>
             </div>
-            <div>
-              <Button type="button" variant="secondary" onClick={handleClose}>
+            <div className='d-flex justify-content-end'>
+              <Button className='me-2' type="button" variant="secondary" onClick={handleClose}>
                 Отменить
               </Button>
               <Button type="submit" variant="primary">
