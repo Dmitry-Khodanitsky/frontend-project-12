@@ -14,20 +14,28 @@ export const ChannelsList = () => {
     )
 
   return (
-    <aside className="border-end" style={{ width: '20%', minWidth: '120px' }}>
+    <aside
+      className="border-end d-flex flex-column h-100"
+      style={{ width: '20%', minWidth: '120px' }}
+    >
       <SectionTitle name="Каналы" isEditable={true} />
       {isLoading ? (
         <Loader />
       ) : (
-        <Nav variant="pills" className="flex-column">
-          {channels.map((channel) => {
-            return (
-              <ChannelItem key={channel.id} id={channel.id}>
-                {channel.removable ? channel.name : `# ${channel.name}`}
-              </ChannelItem>
-            )
-          })}
-        </Nav>
+        <div className="flex-grow-1 overflow-auto">
+          <Nav
+            variant="pills"
+            className="flex-column flex-grow-1 overflow-auto"
+          >
+            {channels.map((channel) => {
+              return (
+                <ChannelItem key={channel.id} id={channel.id}>
+                  {`# ${channel.name}`}
+                </ChannelItem>
+              )
+            })}
+          </Nav>
+        </div>
       )}
     </aside>
   )
