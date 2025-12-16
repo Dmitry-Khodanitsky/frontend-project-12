@@ -2,16 +2,19 @@ import { Formik, Form, Field } from 'formik'
 import { Button } from 'react-bootstrap'
 import { useAddChannelMutation } from '../api/channelsApi'
 import { LoadingSpinner, ModalWrapper } from '@/common/components'
+import { ActiveChannelIdContext } from '@/pages/MainPage/model'
+import { useContext } from 'react'
 
 export const AddChannelForm = ({ handleClose, visible }) => {
+  const { setActiveChannelId } = useContext(ActiveChannelIdContext)
   const [addChannel, { error, isLoading }] = useAddChannelMutation()
 
   const handleSubmit = async (values) => {
     //сделать обновление active channel id
     try {
       const { id: channelId } = await addChannel(values).unwrap()
-      console.log('Успешный ответ от сервера:', channelId)
       handleClose()
+      setActiveChannelId(channelId)
     } catch (err) {
       console.error('Ошибка при добавлении канала:', err)
     }
@@ -47,8 +50,13 @@ export const AddChannelForm = ({ handleClose, visible }) => {
               )}
               <label htmlFor="name">Название канала</label>
             </div>
-            <div className='d-flex justify-content-end'>
-              <Button className='me-2' type="button" variant="secondary" onClick={handleClose}>
+            <div className="d-flex justify-content-end">
+              <Button
+                className="me-2"
+                type="button"
+                variant="secondary"
+                onClick={handleClose}
+              >
                 Отменить
               </Button>
               <Button type="submit" variant="primary">
