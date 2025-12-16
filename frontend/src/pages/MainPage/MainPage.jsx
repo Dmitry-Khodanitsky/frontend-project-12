@@ -4,10 +4,14 @@ import { selectToken } from '@/features/auth/model/authSlice'
 import { Tab, Container } from 'react-bootstrap'
 import { ChannelsList } from '@/features/channels/'
 import { MessagesSection } from '@/features/messages/'
-import { useState } from 'react'
+import { useContext } from 'react'
+import { ActiveChannelIdContext } from './model'
 
 export const MainPage = () => {
-  const [activeChannelId, setActiveChannelId] = useState('1')
+  const { activeChannelId, setActiveChannelId } = useContext(
+    ActiveChannelIdContext
+  )
+
   const token = useSelector(selectToken)
 
   if (!token) {
@@ -18,7 +22,7 @@ export const MainPage = () => {
     <Container fluid className="h-100 p-0">
       <Tab.Container
         id="main-screen"
-        defaultActiveKey={activeChannelId}
+        activeKey={activeChannelId}
         onSelect={setActiveChannelId}
       >
         <div className="d-flex h-100">
