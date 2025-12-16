@@ -2,19 +2,15 @@ import { SectionTitle } from '@/common/components'
 import MessagesList from './MessagesList'
 import MessageTextarea from './MessageTextarea'
 
-import { useSelectedChannel } from '@/common/hooks/useSelectedChannel'
+import { useSelectedChannel } from '@/common/hooks'
 
 export const MessagesSection = ({ activeChannelId }) => {
   const selectedChannel = useSelectedChannel(activeChannelId)
 
-  const channelName = selectedChannel?.removable
-    ? selectedChannel?.name
-    : `# ${selectedChannel?.name}`
-
   return (
     <div className="d-flex flex-column w-100">
       <SectionTitle
-        name={selectedChannel ? channelName : 'Выберите канал'}
+        name={selectedChannel ? `# ${selectedChannel?.name}` : 'Выберите канал'}
         isEditable={false}
       />
       <div className="flex-grow-1 overflow-hidden">
