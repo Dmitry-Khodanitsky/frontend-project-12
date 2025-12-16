@@ -1,7 +1,7 @@
 import { LoginForm } from '@/common/components/'
 import { Navigate } from 'react-router'
 import LoginAnimation from './LoginAnimation'
-import { selectToken } from '@/store/authSlice'
+import { selectToken } from '../../model/authSlice'
 import { useSelector } from 'react-redux'
 
 export const Login = () => {
