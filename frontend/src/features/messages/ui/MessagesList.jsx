@@ -1,12 +1,12 @@
 import { useEffect, useRef } from 'react'
 import MessageItem from './MessageItem'
 import { Loader } from '@/common/components/'
-import { useChannelMessages, useScrollToLastElement } from '@/common/hooks'
+import { useChannelMessages, useScrollTo } from '@/common/hooks'
 
 const MessagesList = ({ channelId }) => {
   const { channelMessages, error, isLoading } = useChannelMessages(channelId)
 
-  const lastMessageRef = useScrollToLastElement(channelMessages)
+  const lastMessageRef = useScrollTo(channelMessages, 'auto')
 
   if (!channelId) return <h4>Кажется мы не смогли найти такой канал</h4>
 
