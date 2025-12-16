@@ -1,3 +1,3 @@
 export { useChannelMessages } from './useChannelMessages'
-export { useScrollToLastElement } from './useScrollToLastElement'
+export { useScrollTo } from './useScrollTo'
 export { useSelectedChannel } from './useSelectedChannel'

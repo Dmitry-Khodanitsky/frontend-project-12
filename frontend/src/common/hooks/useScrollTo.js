@@ -1,14 +1,14 @@
 import { useEffect, useRef } from 'react'
-export const useScrollToLastElement = (dependencies, behavior = 'smooth') => {
-  const lastElementRef = useRef(null)
+export const useScrollTo = (dependencies, behavior = 'smooth') => {
+  const elementRef = useRef(null)
 
   useEffect(() => {
     // Cкролл к последнему элементу'
-    lastElementRef.current?.scrollIntoView({
+    elementRef.current?.scrollIntoView({
       block: 'nearest',
       behavior,
     })
   }, [dependencies, behavior])
 
-  return lastElementRef
+  return elementRef
 }
