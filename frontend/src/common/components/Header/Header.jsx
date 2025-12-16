@@ -1,7 +1,7 @@
 import { Navbar } from 'react-bootstrap'
-import {LogOutButton} from './LogOutButton'
+import { LogOutButton } from '../LogOutButton'
 import { useSelector } from 'react-redux'
-import { selectToken } from '../../../store/authSlice'
+import { selectToken } from '@/features/auth/model/authSlice'
 
 export const Header = () => {
   const token = useSelector(selectToken)
@@ -16,4 +16,3 @@ export const Header = () => {
     </Navbar>
   )
 }
-
