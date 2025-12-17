@@ -13,7 +13,7 @@ export const AddChannelForm = ({ handleClose, visible }) => {
 
   // оборачиваем функцию в useMemo чтобы результат ее вычисления пересчитывался только при изменении channels
   const channelSchema = useMemo(
-    () => getChannelsValidationSchema(channels),
+    () => getChannelsValidationSchema(channels || []),
     [channels]
   )
 
