@@ -5,11 +5,19 @@ import ChannelItem from './ChannelItem'
 import { useScrollTo } from '@/common/hooks'
 import { useContext } from 'react'
 import { ActiveChannelIdContext } from '@/pages/MainPage/model'
+import { Loader, ModalButton } from '@/common/components'
+import ChannelItem from './ChannelItem'
+import { AddChannelForm } from '..'
 
 export const ChannelsList = () => {
   const { data: channels, isError, isLoading } = useGetChannelsQuery()
   const { activeChannelId } = useContext(ActiveChannelIdContext)
   const activeChannelRef = useScrollTo(activeChannelId)
+
+  //хуки и обработчики для работы с модальным окном добавления каналов
+  const [visible, setVisible] = useState(false)
+  const handleOpen = () => setVisible(true)
+  const handleClose = () => setVisible(false)
 
   if (isError)
     return (
@@ -23,7 +31,8 @@ export const ChannelsList = () => {
       className="border-end d-flex flex-column h-100"
       style={{ width: '20%', minWidth: '120px' }}
     >
-      <SectionTitle name="Каналы" isEditable={true} />
+        <ModalButton onClick={handleOpen} text={'＋'} />
+        <AddChannelForm visible={visible} handleClose={handleClose} />
       {isLoading ? (
         <Loader />
       ) : (
