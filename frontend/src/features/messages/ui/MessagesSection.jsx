@@ -8,7 +8,7 @@ export const MessagesSection = ({ activeChannelId }) => {
   const selectedChannel = useSelectedChannel(activeChannelId)
 
   return (
-    <div className="d-flex flex-column w-100">
+    <div className="d-flex flex-column w-100 bg-dark-subtle ">
       <SectionTitle
         name={selectedChannel ? `# ${selectedChannel?.name}` : 'Выберите канал'}
         isEditable={false}

@@ -43,7 +43,7 @@ const MessageTextarea = ({ channel }) => {
             name="textarea"
             as="textarea"
             rows="5"
-            className="w-100 border border-0 bg-dark "
+            className="w-100 border border-0 bg-dark-subtle "
             placeholder={`Написать в ${channel.name}`}
           />
 
