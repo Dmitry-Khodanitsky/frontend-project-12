@@ -1,22 +1,29 @@
 import { Formik, Form, Field } from 'formik'
 import { Button } from 'react-bootstrap'
-import { useAddChannelMutation } from '../api/channelsApi'
+import { useAddChannelMutation, useGetChannelsQuery } from '../api/channelsApi'
 import { LoadingSpinner, ModalWrapper } from '@/common/components'
 import { ActiveChannelIdContext } from '@/pages/MainPage/model'
-import { useContext } from 'react'
+import { useContext, useMemo } from 'react'
+import { getChannelsValidationSchema } from '../model/channelSchema'
 
 export const AddChannelForm = ({ handleClose, visible }) => {
   const { setActiveChannelId } = useContext(ActiveChannelIdContext)
-  const [addChannel, { error, isLoading }] = useAddChannelMutation()
+  const { data: channels } = useGetChannelsQuery()
+  const [addChannel, { error: fetchError, isLoading }] = useAddChannelMutation()
+
+  // оборачиваем функцию в useMemo чтобы результат ее вычисления пересчитывался только при изменении channels
+  const channelSchema = useMemo(
+    () => getChannelsValidationSchema(channels),
+    [channels]
+  )
 
   const handleSubmit = async (values) => {
-    //сделать обновление active channel id
     try {
       const { id: channelId } = await addChannel(values).unwrap()
       handleClose()
       setActiveChannelId(channelId)
     } catch (err) {
-      console.error('Ошибка при добавлении канала:', err)
+      console.error('Оибка при добавлении канала:', err)
     }
   }
 
@@ -27,41 +34,54 @@ export const AddChannelForm = ({ handleClose, visible }) => {
       title={'Добавить канал'}
     >
       <Formik
-        // сделать валидацию через yup
         initialValues={{
           name: '',
         }}
+        // проверка ошибок должна быть только после нажатия на кнопку submit
+        validateOnBlur={false}
+        validateOnChange={false}
+        validationSchema={channelSchema}
         onSubmit={(values) => {
           handleSubmit(values)
         }}
       >
-        {() => (
+        {({ errors, handleChange, setFieldError }) => (
           <Form>
             <div className="form-floating mb-3">
               <Field
-                required
                 id="name"
                 name="name"
                 placeholder="Название канала"
-                className={`form-control ${error ? 'is-invalid' : ''}`}
-              ></Field>
-              {error && (
-                <div className="invalid-tooltip">Неверный название</div>
-              )}
+                className={`form-control ${errors.name ? 'is-invalid' : ''}`}
+                //Тут используется ручное управление формой и вызов обработчика событий
+                onChange={(e) => {
+                  //обработчик ввода
+                  handleChange(e)
+                  // Сброс ошибки при вводе нового значения
+                  if (errors.name) {
+                    setFieldError('name', undefined)
+                  }
+                }}
+              />
+
               <label htmlFor="name">Название канала</label>
-            </div>
-            <div className="d-flex justify-content-end">
-              <Button
-                className="me-2"
-                type="button"
-                variant="secondary"
-                onClick={handleClose}
-              >
-                Отменить
-              </Button>
-              <Button type="submit" variant="primary">
-                {isLoading ? <LoadingSpinner /> : 'Отправить'}
-              </Button>
+              {errors.name && (
+                <div className="invalid-feedback d-block">{errors.name}</div>
+              )}
+              <div className="d-flex justify-content-end">
+                <Button
+                  className="me-2"
+                  type="button"
+                  variant="secondary"
+                  onClick={handleClose}
+                >
+                  Отменить
+                </Button>
+                <Button type="submit" variant="primary">
+                  {isLoading ? <LoadingSpinner /> : 'Добавить'}
+                </Button>
+                {/* fetchError && tootlip ошибка*/}
+              </div>
             </div>
           </Form>
         )}
