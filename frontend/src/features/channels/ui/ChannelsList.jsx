@@ -1,9 +1,7 @@
 import { Nav } from 'react-bootstrap'
+import { useContext, useState } from 'react'
 import { useGetChannelsQuery } from '@/features/channels/api/channelsApi'
-import { SectionTitle, Loader } from '@/common/components'
-import ChannelItem from './ChannelItem'
 import { useScrollTo } from '@/common/hooks'
-import { useContext } from 'react'
 import { ActiveChannelIdContext } from '@/pages/MainPage/model'
 import { Loader, ModalButton } from '@/common/components'
 import ChannelItem from './ChannelItem'
@@ -31,8 +29,12 @@ export const ChannelsList = () => {
       className="border-end d-flex flex-column h-100"
       style={{ width: '20%', minWidth: '120px' }}
     >
+      <div className="d-flex align-items-center justify-content-between bg-dark-subtle p-3">
+        <b>Каналы</b>
         <ModalButton onClick={handleOpen} text={'＋'} />
         <AddChannelForm visible={visible} handleClose={handleClose} />
+      </div>
+
       {isLoading ? (
         <Loader />
       ) : (
@@ -51,8 +53,6 @@ export const ChannelsList = () => {
               )
             })}
           </Nav>
-          {/* якорь для автоматического скрола вниз к активному каналу */}
-          {/* <div ref={lastMessageRef} className="scrollAnchor" /> */}
         </div>
       )}
     </aside>
