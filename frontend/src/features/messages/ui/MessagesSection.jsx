@@ -1,4 +1,3 @@
-import { SectionTitle } from '@/common/components'
 import MessagesList from './MessagesList'
 import MessageTextarea from './MessageTextarea'
 
@@ -9,10 +8,10 @@ export const MessagesSection = ({ activeChannelId }) => {
 
   return (
     <div className="d-flex flex-column w-100 bg-dark-subtle ">
-      <SectionTitle
-        name={selectedChannel ? `# ${selectedChannel?.name}` : 'Выберите канал'}
-        isEditable={false}
-      />
+      <div className="p-3">
+        <b>{`# ${selectedChannel?.name}`}</b>
+      </div>
+
       <div className="flex-grow-1 overflow-hidden">
         <div className="h-100 overflow-auto p-3">
           <MessagesList channelId={activeChannelId} />
