@@ -1,29 +1,37 @@
 import { Nav } from 'react-bootstrap'
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { useGetChannelsQuery } from '@/features/channels/api/channelsApi'
 import { useScrollTo } from '@/common/hooks'
 import { ActiveChannelIdContext } from '@/pages/MainPage/model'
 import { Loader, ShowModalButton } from '@/common/components'
 import ChannelItem from './ChannelItem'
 import { AddChannelForm } from '..'
+import { useNotification } from '@/app/model/NotifyContext'
 
 export const ChannelsList = () => {
   const { data: channels, isError, isLoading } = useGetChannelsQuery()
   const { activeChannelId } = useContext(ActiveChannelIdContext)
   const activeChannelRef = useScrollTo(activeChannelId)
+  const showNotification = useNotification()
 
   //хуки и обработчики для работы с модальным окном добавления каналов
   const [visible, setVisible] = useState(false)
   const handleOpen = () => setVisible(true)
   const handleClose = () => setVisible(false)
 
-  // использовать уведомление о том, что не удалось получить список каналов
-  if (isError)
+  useEffect(() => {
+    if (isError) {
+      showNotification('Ошибка, каналы не загрузились', 'danger')
+    }
+  }, [isError])
+
+  if (isError) {
     return (
-      <aside className="border-end" style={{ width: '20%', minWidth: '120px' }}>
-        <h1>Ошибка</h1>
+      <aside className="border-end h-100 p-3">
+        <p className="text-danger">Ошибка загрузки</p>
       </aside>
     )
+  }
 
   return (
     <aside
