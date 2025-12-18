@@ -4,28 +4,30 @@ import { useSelector } from 'react-redux'
 import { selectUser } from '@/features/auth/model/authSlice'
 import { LoadingSpinner } from '@/common/components'
 import { useSendMessageMutation } from '../api/messagesApi'
+import { useNotification } from '@/app/model/NotifyContext'
 
 const MessageTextarea = ({ channel }) => {
-  const [sendMessage, { error, isLoading: isSending }] =
-    useSendMessageMutation()
+  const [sendMessage, { isLoading: isSending }] = useSendMessageMutation()
 
   const currentUser = useSelector(selectUser)
-  console.log(currentUser)
-
+  const showNotification = useNotification()
   if (!channel) return null
-  // if (error) return что-либо
 
   return (
     <Formik
       initialValues={{ textarea: '' }}
-      onSubmit={(values, { resetForm }) => {
+      onSubmit={async (values, { resetForm }) => {
         const newMessage = {
           body: values.textarea,
           channelId: channel.id,
           username: currentUser,
         }
-        sendMessage(newMessage)
-        resetForm()
+        try {
+          await sendMessage(newMessage).unwrap()
+          resetForm()
+        } catch (err) {
+          showNotification(`Ошибка отправки: ${err.data}`, 'danger')
+        }
       }}
     >
       {({ values, handleSubmit }) => (
@@ -57,6 +59,7 @@ const MessageTextarea = ({ channel }) => {
         </Form>
       )}
     </Formik>
+    // if (error) return errorTooltip
   )
 }
 
