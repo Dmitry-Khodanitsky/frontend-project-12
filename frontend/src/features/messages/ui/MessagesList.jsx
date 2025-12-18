@@ -1,5 +1,5 @@
 import MessageItem from './MessageItem'
-import { Loader } from '@/common/components/'
+import { Loader, ErrorMessage } from '@/common/components/'
 import { useChannelMessages, useScrollTo } from '@/common/hooks'
 import { useGetChannelsQuery } from '@/features/channels/api/channelsApi'
 import { useNotification } from '@/app/model/NotifyContext'
@@ -23,19 +23,19 @@ const MessagesList = ({ channelId }) => {
     }
   }, [channelsError, messagesError])
 
+  if (isLoading) return <Loader />
+  if (messagesError)
+    return <ErrorMessage message={'Не получилось загрузить сообщения'} />
+
   return (
     <div style={{ minHeight: '100%' }}>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        channelMessages?.map((message) => (
-          <MessageItem
-            key={message.id}
-            username={message.username}
-            text={message.body}
-          />
-        ))
-      )}
+      {channelMessages?.map((message) => (
+        <MessageItem
+          key={message.id}
+          username={message.username}
+          text={message.body}
+        />
+      ))}
       {/* якорь для автоматического скрола вниз к последнему сообщению */}
       <div ref={lastMessageRef} className="scrollAnchor" />
     </div>
