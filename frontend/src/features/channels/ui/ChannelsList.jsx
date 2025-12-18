@@ -3,7 +3,7 @@ import { useContext, useState } from 'react'
 import { useGetChannelsQuery } from '@/features/channels/api/channelsApi'
 import { useScrollTo } from '@/common/hooks'
 import { ActiveChannelIdContext } from '@/pages/MainPage/model'
-import { Loader, ModalButton } from '@/common/components'
+import { Loader, ShowModalButton } from '@/common/components'
 import ChannelItem from './ChannelItem'
 import { AddChannelForm } from '..'
 
@@ -31,7 +31,7 @@ export const ChannelsList = () => {
     >
       <div className="d-flex align-items-center justify-content-between bg-dark-subtle p-3">
         <b>Каналы</b>
-        <ModalButton onClick={handleOpen} text={'＋'} />
+        <ShowModalButton onClick={handleOpen} text={'＋'} />
         <AddChannelForm visible={visible} handleClose={handleClose} />
       </div>
 
