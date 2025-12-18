@@ -8,7 +8,7 @@ export const MessagesSection = ({ activeChannelId }) => {
 
   return (
     <div className="d-flex flex-column w-100 bg-dark-subtle ">
-      <div className="p-3">
+      <div className="p-3 shadow">
         <b>{`# ${selectedChannel?.name}`}</b>
       </div>
 

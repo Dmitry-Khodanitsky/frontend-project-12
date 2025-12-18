@@ -17,6 +17,7 @@ export const ChannelsList = () => {
   const handleOpen = () => setVisible(true)
   const handleClose = () => setVisible(false)
 
+  // использовать уведомление о том, что не удалось получить список каналов
   if (isError)
     return (
       <aside className="border-end" style={{ width: '20%', minWidth: '120px' }}>
@@ -29,7 +30,7 @@ export const ChannelsList = () => {
       className="border-end d-flex flex-column h-100"
       style={{ width: '20%', minWidth: '120px' }}
     >
-      <div className="d-flex align-items-center justify-content-between bg-dark-subtle p-3">
+      <div className="d-flex align-items-center justify-content-between bg-dark-subtle p-3 shadow">
         <b>Каналы</b>
         <ShowModalButton onClick={handleOpen} text={'＋'} />
         <AddChannelForm visible={visible} handleClose={handleClose} />
