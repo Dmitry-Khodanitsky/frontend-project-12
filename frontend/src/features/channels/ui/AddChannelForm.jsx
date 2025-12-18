@@ -5,11 +5,14 @@ import { LoadingSpinner, ModalWrapper } from '@/common/components'
 import { ActiveChannelIdContext } from '@/pages/MainPage/model'
 import { useContext, useMemo } from 'react'
 import { getChannelsValidationSchema } from '../model/channelSchema'
+import { useNotification } from '@/app/model/NotifyContext'
 
 export const AddChannelForm = ({ handleClose, visible }) => {
   const { setActiveChannelId } = useContext(ActiveChannelIdContext)
   const { data: channels } = useGetChannelsQuery()
-  const [addChannel, { error: fetchError, isLoading }] = useAddChannelMutation()
+  const [addChannel, { isLoading }] = useAddChannelMutation()
+
+  const showNotification = useNotification()
 
   // оборачиваем функцию в useMemo чтобы результат ее вычисления пересчитывался только при изменении channels
   const channelSchema = useMemo(
@@ -22,8 +25,9 @@ export const AddChannelForm = ({ handleClose, visible }) => {
       const { id: channelId } = await addChannel(values).unwrap()
       handleClose()
       setActiveChannelId(channelId)
+      showNotification('Канал добавлен', 'success')
     } catch (err) {
-      console.error('Оибка при добавлении канала:', err)
+      showNotification(`Ошибка добавления канала: ${err.data}`, 'danger')
     }
   }
 
@@ -52,7 +56,9 @@ export const AddChannelForm = ({ handleClose, visible }) => {
                 id="name"
                 name="name"
                 placeholder="Название канала"
-                className={`form-control ${errors.name ? 'is-invalid' : ''}`}
+                className={`form-control ${
+                  errors.name ? 'is-invalid' : ''
+                } mb-3`}
                 //Тут используется ручное управление формой и вызов обработчика событий
                 onChange={(e) => {
                   //обработчик ввода
@@ -80,7 +86,6 @@ export const AddChannelForm = ({ handleClose, visible }) => {
                 <Button type="submit" variant="primary">
                   {isLoading ? <LoadingSpinner /> : 'Добавить'}
                 </Button>
-                {/* fetchError && tootlip ошибка*/}
               </div>
             </div>
           </Form>
