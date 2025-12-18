@@ -3,7 +3,7 @@ import { useContext, useState, useEffect } from 'react'
 import { useGetChannelsQuery } from '@/features/channels/api/channelsApi'
 import { useScrollTo } from '@/common/hooks'
 import { ActiveChannelIdContext } from '@/pages/MainPage/model'
-import { Loader, ShowModalButton } from '@/common/components'
+import { Loader, ShowModalButton, ErrorMessage } from '@/common/components'
 import ChannelItem from './ChannelItem'
 import { AddChannelForm } from '..'
 import { useNotification } from '@/app/model/NotifyContext'
@@ -25,14 +25,6 @@ export const ChannelsList = () => {
     }
   }, [isError])
 
-  if (isError) {
-    return (
-      <aside className="border-end h-100 p-3">
-        <p className="text-danger">Ошибка загрузки</p>
-      </aside>
-    )
-  }
-
   return (
     <aside
       className="border-end d-flex flex-column h-100"
@@ -46,6 +38,8 @@ export const ChannelsList = () => {
 
       {isLoading ? (
         <Loader />
+      ) : isError ? (
+        <ErrorMessage message={'Ошибка, каналы не загрузились'} />
       ) : (
         <div className="flex-grow-1 overflow-auto">
           <Nav
