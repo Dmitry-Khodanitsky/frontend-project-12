@@ -32,7 +32,7 @@ export const channelsApi = baseApi.injectEndpoints({
 
           const handleRemoveChannel = (payload) => {
             updateCachedData((draft) => {
-              draft.filter((draft) => draft.id !== payload)
+              return draft.filter((draft) => draft.id !== payload.id)
             })
           }
           socket.on('newChannel', handleNewChannel)
@@ -50,6 +50,7 @@ export const channelsApi = baseApi.injectEndpoints({
         socket.off('removeChannel')
       },
     }),
+    // функции мутации
     addChannel: builder.mutation({
       query: (channel) => ({
         url: 'channels',
@@ -57,7 +58,17 @@ export const channelsApi = baseApi.injectEndpoints({
         body: channel,
       }),
     }),
+    removeChannel: builder.mutation({
+      query: (id) => ({
+        url: `channels/${id}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 })
 
-export const { useGetChannelsQuery, useAddChannelMutation } = channelsApi
+export const {
+  useGetChannelsQuery,
+  useAddChannelMutation,
+  useRemoveChannelMutation,
+} = channelsApi
