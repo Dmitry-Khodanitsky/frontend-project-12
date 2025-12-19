@@ -43,6 +43,7 @@ export const ChannelsList = () => {
       ) : (
         <div className="flex-grow-1 overflow-auto">
           <Nav
+            as="ul"
             variant="pills"
             className="flex-column flex-grow-1 overflow-auto"
           >
@@ -50,9 +51,11 @@ export const ChannelsList = () => {
               const ref =
                 channel.id === activeChannelId ? activeChannelRef : null
               return (
-                <ChannelItem key={channel.id} id={channel.id} ref={ref}>
-                  {`# ${channel.name}`}
-                </ChannelItem>
+                <ChannelItem
+                  key={channel.id}
+                  channel={channel}
+                  ref={ref}
+                ></ChannelItem>
               )
             })}
           </Nav>
