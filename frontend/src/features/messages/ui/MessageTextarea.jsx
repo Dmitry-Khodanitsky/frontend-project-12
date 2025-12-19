@@ -59,7 +59,6 @@ const MessageTextarea = ({ channel }) => {
         </Form>
       )}
     </Formik>
-    // if (error) return errorTooltip
   )
 }
 
