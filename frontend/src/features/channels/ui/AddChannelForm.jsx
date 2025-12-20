@@ -74,19 +74,11 @@ export const AddChannelForm = ({ handleClose, visible }) => {
               {errors.name && (
                 <div className="invalid-feedback d-block">{errors.name}</div>
               )}
-              <div className="d-flex justify-content-end">
-                <Button
-                  className="me-2"
-                  type="button"
-                  variant="secondary"
-                  onClick={handleClose}
-                >
-                  Отменить
-                </Button>
-                <Button type="submit" variant="primary">
-                  {isLoading ? <LoadingSpinner /> : 'Добавить'}
-                </Button>
-              </div>
+              <ModalButtons
+                handleClose={handleClose}
+                isLoading={isLoading}
+                title="Добавить"
+              />
             </div>
           </Form>
         )}
