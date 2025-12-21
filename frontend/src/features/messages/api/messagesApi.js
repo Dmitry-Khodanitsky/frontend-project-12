@@ -5,6 +5,7 @@ export const channelsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getMessages: builder.query({
       query: () => 'messages',
+      providesTags: ['messages'],
       async onCacheEntryAdded(
         arg,
         { updateCachedData, cacheDataLoaded, cacheEntryRemoved }
@@ -23,7 +24,14 @@ export const channelsApi = baseApi.injectEndpoints({
               draft.push(payload)
             })
           }
+
+          const handleRemoveMessage = (payload) => {
+            updateCachedData((draft) => {
+              return draft.filter((draft) => draft.id !== payload.id)
+            })
+          }
           socket.on('newMessage', handleNewMessage)
+          socket.on('removeMessage', handleRemoveMessage)
         } catch (error) {
           // Если HTTP запрос завершился ошибкой, подписка не создастся
 
@@ -33,6 +41,7 @@ export const channelsApi = baseApi.injectEndpoints({
         // RTK Query автоматически выполнит этот код:
         await cacheEntryRemoved
         socket.off('newMessage')
+        socket.off('removeMessage')
       },
     }),
     sendMessage: builder.mutation({
@@ -42,7 +51,17 @@ export const channelsApi = baseApi.injectEndpoints({
         body: message,
       }),
     }),
+    removeMessage: builder.mutation({
+      query: (id) => ({
+        url: `messages/${id}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 })
 
-export const { useGetMessagesQuery, useSendMessageMutation } = channelsApi
+export const {
+  useGetMessagesQuery,
+  useSendMessageMutation,
+  useRemoveMessageMutation,
+} = channelsApi
