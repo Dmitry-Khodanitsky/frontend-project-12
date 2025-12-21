@@ -1,11 +1,10 @@
 import { Dropdown } from 'react-bootstrap'
-import { useState, useContext } from 'react'
+import { useState, memo } from 'react'
 import { useRemoveChannelMutation } from '../api/channelsApi'
 import { useNotification } from '@/app/model/NotifyContext'
 import { ModalWrapper, ModalButtons } from '@/common/components'
-import { ActiveChannelIdContext } from '@/pages/MainPage/model'
 
-export const ChannelDropdown = ({ id }) => {
+export const ChannelDropdown = memo(({ id }) => {
   const [visible, setVisible] = useState(false)
   const [removeChannel, { isLoading }] = useRemoveChannelMutation()
   const showNotification = useNotification()
@@ -50,4 +49,4 @@ export const ChannelDropdown = ({ id }) => {
       </ModalWrapper>
     </>
   )
-}
+})
