@@ -3,7 +3,7 @@ import { useEffect, useMemo } from 'react'
 import { setCurrentChannelId } from '@/app/model/uiSlice'
 import { useDispatch } from 'react-redux'
 
-export const useSelectedChannel = (channelId) => {
+export const useChannelSelector = (channelId) => {
   const { data: channels = [] } = useGetChannelsQuery()
   const dispatch = useDispatch()
 
