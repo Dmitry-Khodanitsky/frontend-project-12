@@ -1,7 +1,7 @@
 import { Formik, Form, Field } from 'formik'
-import { Button } from 'react-bootstrap'
+import { ModalButtons, ModalWrapper } from '@/common/components'
 import { useAddChannelMutation, useGetChannelsQuery } from '../api/channelsApi'
-import { LoadingSpinner, ModalWrapper } from '@/common/components'
+
 import { ActiveChannelIdContext } from '@/pages/MainPage/model'
 import { useContext, useMemo } from 'react'
 import { getChannelsValidationSchema } from '../model/channelSchema'
