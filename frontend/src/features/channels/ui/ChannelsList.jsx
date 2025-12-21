@@ -1,9 +1,7 @@
 import { Nav } from 'react-bootstrap'
-import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { useGetChannelsQuery } from '@/features/channels/api/channelsApi'
-import { currentChannenId } from '@/app/model/uiSlice'
-import { useScrollTo } from '@/common/hooks'
+import { useScrollTo, useChannelId } from '@/common/hooks'
 import { Loader, ShowModalButton, ErrorMessage } from '@/common/components'
 import ChannelItem from './ChannelItem'
 import { AddChannelForm } from '..'
@@ -11,7 +9,7 @@ import { useNotification } from '@/app/model/NotifyContext'
 
 export const ChannelsList = () => {
   const { data: channels, isError, isLoading } = useGetChannelsQuery()
-  const activeChannelId = useSelector(currentChannenId)
+  const { activeChannelId } = useChannelId()
   const activeChannelRef = useScrollTo(activeChannelId)
   const showNotification = useNotification()
 
