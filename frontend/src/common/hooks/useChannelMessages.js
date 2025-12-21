@@ -1,3 +1,4 @@
+// хук для получения сообщений сообщений конкретного канала
 import { useGetMessagesQuery } from '@/features/messages/api/messagesApi'
 
 export const useChannelMessages = (channelId) => {
@@ -11,3 +12,6 @@ export const useChannelMessages = (channelId) => {
     isLoading,
   }
 }
+
+// Где используется:
+//В MessagesList для отрисовки сообщений активного канала

@@ -1,3 +1,5 @@
+// хук для автоматического скролла к определенному элементу
+
 import { useEffect, useRef } from 'react'
 export const useScrollTo = (dependencies, behavior = 'smooth') => {
   const elementRef = useRef(null)
@@ -12,3 +14,7 @@ export const useScrollTo = (dependencies, behavior = 'smooth') => {
 
   return elementRef
 }
+
+// Где используется:
+// MessagesList - для автоматического скролла вниз при добавлении нового сообщения
+// ChannelList - для автоматического скролла к выбранному каналу
