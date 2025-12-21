@@ -5,6 +5,14 @@ export const channelsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getChannels: builder.query({
       query: () => 'channels',
+      providesTags: (result) => [
+        //Это нужно для точечных изменений. Если переименовать канал №4, не нужно снова запрашивать весь список из 100 каналов. Мы просто инвалидируем тег конкретного ID, обновится только этот канал.
+        // добавляется тег для списка каналов
+        // нужен для случаев, когда меняется количество каналов (например, при добавлении нового канала). У нового канала еще нет ID в кэше, поэтому мы инвалидируем общую метку LIST, чтобы запросить весь список каналов и увидеть новинку.
+        { type: 'channels', id: 'LIST' },
+        // добавляется тег с id к конкретному каналу
+        ...(result?.map(({ id }) => ({ type: 'channels', id })) || []),
+      ],
       async onCacheEntryAdded(
         arg,
         { updateCachedData, cacheDataLoaded, cacheEntryRemoved }
@@ -65,6 +73,10 @@ export const channelsApi = baseApi.injectEndpoints({
         url: `channels/${id}`,
         method: 'DELETE',
       }),
+      invalidatesTags: (result, error, id) => [
+        { type: 'channels', id },
+        //синхронизируем состояние и делаем запрос актуальных сообщений
+      ],
     }),
   }),
 })
