@@ -19,8 +19,8 @@ export const channelsApi = baseApi.injectEndpoints({
           const handleNewChannel = (payload) => {
             //Просто добавляем новое сообщение в существующий массив в кэше
             // RTK Query сам уведомит компоненты об изменениях
-            updateCachedData((draft) => {
-              draft.push(payload)
+            updateCachedData((channels) => {
+              channels.push(payload)
             })
           }
 
@@ -31,8 +31,10 @@ export const channelsApi = baseApi.injectEndpoints({
           }
 
           const handleRemoveChannel = (payload) => {
-            updateCachedData((draft) => {
-              return draft.filter((draft) => draft.id !== payload.id)
+            updateCachedData((channels) => {
+              return channels.filter(
+                (channels) => String(channels.id) !== String(payload.id)
+              )
             })
           }
           socket.on('newChannel', handleNewChannel)
