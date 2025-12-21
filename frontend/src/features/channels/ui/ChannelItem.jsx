@@ -1,9 +1,18 @@
 import { Nav, Dropdown, ButtonGroup, Button } from 'react-bootstrap'
 import { ChannelDropdown } from './ChannelDropdown'
+import { useState } from 'react'
 
-const ChannelItem = ({ channel }) => {
+const ChannelItem = ({ channel, ref }) => {
+  const [isHovered, setIsHovered] = useState(false)
+
   return (
-    <Nav.Item as="li" className="w-100">
+    <Nav.Item
+      as="li"
+      className="w-100"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      ref={ref}
+    >
       <Nav.Link
         eventKey={channel.id}
         className="d-flex p-1 border-0 rounded-0"
@@ -17,7 +26,7 @@ const ChannelItem = ({ channel }) => {
             {`# ${channel.name}`}
           </Button>
 
-          {channel.removable && (
+          {channel.removable && isHovered && (
             <Dropdown
               as={ButtonGroup}
               className="flex-grow-0"
