@@ -8,9 +8,6 @@ import { ActiveChannelIdContext } from '@/pages/MainPage/model'
 export const ChannelDropdown = ({ id }) => {
   const [visible, setVisible] = useState(false)
   const [removeChannel, { isLoading }] = useRemoveChannelMutation()
-  const { activeChannelId, setActiveChannelId } = useContext(
-    ActiveChannelIdContext
-  )
   const showNotification = useNotification()
   const handleOpen = () => setVisible(true)
   const handleClose = () => setVisible(false)
@@ -18,11 +15,6 @@ export const ChannelDropdown = ({ id }) => {
   const handleRemove = async () => {
     try {
       await removeChannel(id).unwrap()
-      //удалить сообщения этого канала
-      // сделать активным канал general если пользователи были в удаленном канале
-      if (activeChannelId === id) {
-        setActiveChannelId('1')
-      }
       showNotification('Канал успешно удален', 'success')
     } catch (err) {
       showNotification(`Ошибка удаления канала: ${err.data}`, 'danger')
