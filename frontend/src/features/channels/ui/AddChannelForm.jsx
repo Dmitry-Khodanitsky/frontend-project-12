@@ -1,16 +1,16 @@
 import { Formik, Form, Field } from 'formik'
 import { ModalButtons, ModalWrapper } from '@/common/components'
 import { useAddChannelMutation, useGetChannelsQuery } from '../api/channelsApi'
-
-import { ActiveChannelIdContext } from '@/pages/MainPage/model'
-import { useContext, useMemo } from 'react'
+import { setCurrentChannelId } from '@/app/model/uiSlice'
+import { useDispatch } from 'react-redux'
+import { useMemo } from 'react'
 import { getChannelsValidationSchema } from '../model/channelSchema'
 import { useNotification } from '@/app/model/NotifyContext'
 
 export const AddChannelForm = ({ handleClose, visible }) => {
-  const { setActiveChannelId } = useContext(ActiveChannelIdContext)
   const { data: channels } = useGetChannelsQuery()
   const [addChannel, { isLoading }] = useAddChannelMutation()
+  const dispatch = useDispatch()
 
   const showNotification = useNotification()
 
@@ -24,7 +24,7 @@ export const AddChannelForm = ({ handleClose, visible }) => {
     try {
       const { id: channelId } = await addChannel(values).unwrap()
       handleClose()
-      setActiveChannelId(channelId)
+      dispatch(setCurrentChannelId(channelId))
       showNotification('Канал добавлен', 'success')
     } catch (err) {
       showNotification(`Ошибка добавления канала: ${err.data}`, 'danger')

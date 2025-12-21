@@ -1,10 +1,11 @@
 import { useGetChannelsQuery } from '@/features/channels/api/channelsApi'
-import { useContext, useEffect, useMemo } from 'react'
-import { ActiveChannelIdContext } from '@/pages/MainPage/model'
+import { useEffect, useMemo } from 'react'
+import { setCurrentChannelId } from '@/app/model/uiSlice'
+import { useDispatch } from 'react-redux'
 
 export const useSelectedChannel = (channelId) => {
   const { data: channels = [] } = useGetChannelsQuery()
-  const { setActiveChannelId } = useContext(ActiveChannelIdContext)
+  const dispatch = useDispatch()
 
   const selectedChannel = useMemo(() => {
     return channels.find((channel) => channel.id === channelId)
@@ -14,10 +15,12 @@ export const useSelectedChannel = (channelId) => {
   useEffect(() => {
     // Если selectedChannel не найден (удален или не существует) то активный канал становится general (id: 1)
     if (channels.length > 0 && !selectedChannel) {
-      setActiveChannelId('1')
+      dispatch(setCurrentChannelId('1'))
     }
-  }, [channels, selectedChannel, setActiveChannelId])
+  }, [channels, selectedChannel, dispatch])
 
   if (channels.length === 0) return null
   return selectedChannel || channels[0]
 }
+
+// используется в messageSection для автоматического переключения на дефолтный канал, если выбранный каланал был удален вместе с сообщениями
