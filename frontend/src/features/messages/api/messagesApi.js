@@ -6,6 +6,7 @@ export const channelsApi = baseApi.injectEndpoints({
     getMessages: builder.query({
       query: () => 'messages',
       providesTags: ['messages'],
+        //Слушатель сокетов для синхронизации кэша. Обновляет список каналов мгновенно, когда другие пользователи вносят изменения.
       async onCacheEntryAdded(
         arg,
         { updateCachedData, cacheDataLoaded, cacheEntryRemoved }
