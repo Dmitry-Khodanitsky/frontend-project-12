@@ -1,4 +1,4 @@
 export { useChannelMessages } from './useChannelMessages'
 export { useScrollTo } from './useScrollTo'
-export { useChannelSelector } from './useChannelSelector'
+export { useActiveChannelSelector } from './useActiveChannelSelector'
 export { useChannelId } from './useChannelId'

@@ -1,9 +1,9 @@
 import MessagesList from './MessagesList'
 import MessageTextarea from './MessageTextarea'
-import { useChannelSelector } from '@/common/hooks'
+import { useActiveChannelSelector } from '@/common/hooks'
 
 export const MessagesSection = ({ activeChannelId }) => {
-  const selectedChannel = useChannelSelector(activeChannelId)
+  const selectedChannel = useActiveChannelSelector(activeChannelId)
 
   return (
     <div className="d-flex flex-column w-100 bg-dark-subtle ">

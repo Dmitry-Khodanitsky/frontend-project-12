@@ -4,7 +4,7 @@ import { useGetChannelsQuery } from '@/features/channels/api/channelsApi'
 import { useEffect, useMemo } from 'react'
 import { useChannelId } from './useChannelId'
 
-export const useChannelSelector = (channelId) => {
+export const useActiveChannelSelector = (channelId) => {
   const { data: channels = [] } = useGetChannelsQuery()
   const { setCurrentChannelId } = useChannelId()
 
