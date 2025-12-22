@@ -13,6 +13,8 @@ export const channelsApi = baseApi.injectEndpoints({
         // добавляется тег с id к конкретному каналу
         ...(result?.map(({ id }) => ({ type: 'channels', id })) || []),
       ],
+
+      //Слушатель сокетов для синхронизации кэша. Обновлять список каналов мгновенно, когда другие пользователи вносят изменения.
       async onCacheEntryAdded(
         arg,
         { updateCachedData, cacheDataLoaded, cacheEntryRemoved }
@@ -25,6 +27,7 @@ export const channelsApi = baseApi.injectEndpoints({
           // Когда данные получены из соединения с сервером,
           //Обновляем результат запроса полученным сообщением
           const handleNewChannel = (payload) => {
+            //ручное обновление данных в кэше
             //Просто добавляем новое сообщение в существующий массив в кэше
             // RTK Query сам уведомит компоненты об изменениях
             updateCachedData((channels) => {
@@ -33,12 +36,19 @@ export const channelsApi = baseApi.injectEndpoints({
           }
 
           const handleRenameChannel = (payload) => {
-            updateCachedData((draft) => {
-              draft.push(payload)
+            //ручное обновление данных в кэше
+            updateCachedData((channels) => {
+              const channel = channels.find(
+                (channel) => channel.id === payload.id
+              )
+              if (channel) {
+                channel.name = payload.name
+              }
             })
           }
 
           const handleRemoveChannel = (payload) => {
+            //ручное обновление данных в кэше
             updateCachedData((channels) => {
               return channels.filter(
                 (channels) => String(channels.id) !== String(payload.id)
@@ -82,7 +92,7 @@ export const channelsApi = baseApi.injectEndpoints({
       query: ({ id, name }) => ({
         url: `channels/${id}`,
         method: 'PATCH',
-        body: {name},
+        body: { name },
       }),
       invalidatesTags: (result, error, { id }) => [{ type: 'channels', id }],
     }),
