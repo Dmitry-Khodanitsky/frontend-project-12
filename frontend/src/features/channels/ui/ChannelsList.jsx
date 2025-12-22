@@ -1,22 +1,24 @@
 import { Nav } from 'react-bootstrap'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useGetChannelsQuery } from '@/features/channels/api/channelsApi'
 import { useScrollTo, useChannelId } from '@/common/hooks'
 import { Loader, ShowModalButton, ErrorMessage } from '@/common/components'
 import ChannelItem from './ChannelItem'
-import { AddChannelForm } from '..'
+import { AddChannelModal } from './modals/'
 import { useNotification } from '@/app/model/NotifyContext'
+import { useDispatch } from 'react-redux'
+import { openModal } from '@/app/model/uiSlice'
 
 export const ChannelsList = () => {
   const { data: channels, isError, isLoading } = useGetChannelsQuery()
   const { activeChannelId } = useChannelId()
   const activeChannelRef = useScrollTo(activeChannelId)
   const showNotification = useNotification()
+  const dispatch = useDispatch()
 
-  //хуки и обработчики для работы с модальным окном добавления каналов
-  const [visible, setVisible] = useState(false)
-  const handleOpen = () => setVisible(true)
-  const handleClose = () => setVisible(false)
+  //хуки и обработчики для работы с модальным окном добавления каналов через slice
+  const handleOpen = () =>
+    dispatch(openModal({ type: 'addChannel', extra: null }))
 
   useEffect(() => {
     if (isError) {
@@ -32,7 +34,8 @@ export const ChannelsList = () => {
       <div className="d-flex align-items-center justify-content-between bg-dark-subtle p-3 shadow">
         <b>Каналы</b>
         <ShowModalButton onClick={handleOpen} text={'＋'} />
-        <AddChannelForm visible={visible} handleClose={handleClose} />
+        {/* убрали пропсы из модалки */}
+        <AddChannelModal />
       </div>
 
       {isLoading ? (
