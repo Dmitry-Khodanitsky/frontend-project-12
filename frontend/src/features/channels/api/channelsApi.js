@@ -14,7 +14,7 @@ export const channelsApi = baseApi.injectEndpoints({
         ...(result?.map(({ id }) => ({ type: 'channels', id })) || []),
       ],
 
-      //Слушатель сокетов для синхронизации кэша. Обновлять список каналов мгновенно, когда другие пользователи вносят изменения.
+      //Слушатель сокетов для синхронизации кэша. Обновляет список каналов мгновенно, когда другие пользователи вносят изменения.
       async onCacheEntryAdded(
         arg,
         { updateCachedData, cacheDataLoaded, cacheEntryRemoved }
