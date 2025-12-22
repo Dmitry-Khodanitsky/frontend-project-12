@@ -1,2 +1,2 @@
 export { ChannelsList } from '@/features/channels/ui/ChannelsList'
-export { AddChannelForm } from '@/features/channels/ui/AddChannelForm'
+export { AddChannelModal } from '@/features/channels/ui/modals/'
