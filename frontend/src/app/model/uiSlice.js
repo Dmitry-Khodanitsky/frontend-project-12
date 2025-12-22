@@ -7,8 +7,8 @@ const uiSlice = createSlice({
     defaultChannekId: '1',
     modal: {
       isOpened: false,
-      type: null,
-      extra: null,
+      type: null, // addChannel, removeChannel, renameChannel
+      extra: null, // принимает id канала при удалении и переименовывании {id: String(number)}
     },
   },
   reducers: {
@@ -20,12 +20,13 @@ const uiSlice = createSlice({
       const { type, channelId } = payload
       state.modal.isOpened = true
       state.modal.type = type
-      state.modal.extra = channelId
+      state.modal.extra = { id: channelId }
     },
     closeModal: (state) => {
       state.modal.isOpened = false
       state.modal.type = null
       state.modal.extra = null
+      console.log('модалка закрыта')
     },
   },
 })
@@ -33,3 +34,4 @@ const uiSlice = createSlice({
 export default uiSlice.reducer
 export const { setCurrentChannelId, openModal, closeModal } = uiSlice.actions
 export const currentChannenId = (state) => state.ui.currentChannelId
+export const modalState = (state) => state.ui.modal
