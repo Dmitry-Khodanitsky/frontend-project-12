@@ -8,15 +8,15 @@ import { MessagesSection } from '@/features/messages/'
 
 export const MainPage = () => {
   const token = useSelector(selectToken)
+  const dispatch = useDispatch()
+  const activeChannelId = useSelector(currentChannenId)
+
+  const handleSelect = (id) => {
+    dispatch(setCurrentChannelId(id))
+  }
 
   if (!token) {
     return <Navigate to="/login" state={{ from: location.pathname }} replace />
-  }
-
-  const dispatch = useDispatch()
-  const activeChannelId = useSelector(currentChannenId)
-  const handleSelect = (id) => {
-    dispatch(setCurrentChannelId(id))
   }
 
   return (
