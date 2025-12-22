@@ -78,6 +78,14 @@ export const channelsApi = baseApi.injectEndpoints({
         //синхронизируем состояние и делаем запрос актуальных сообщений
       ],
     }),
+    renameChannel: builder.mutation({
+      query: ({ id, name }) => ({
+        url: `channels/${id}`,
+        method: 'PATCH',
+        body: {name},
+      }),
+      invalidatesTags: (result, error, { id }) => [{ type: 'channels', id }],
+    }),
   }),
 })
 
@@ -85,4 +93,5 @@ export const {
   useGetChannelsQuery,
   useAddChannelMutation,
   useRemoveChannelMutation,
+  useRenameChannelMutation,
 } = channelsApi
