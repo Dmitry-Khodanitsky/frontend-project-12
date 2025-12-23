@@ -1,4 +1,4 @@
-import { LoginForm } from '@/common/components/'
+import { LoginForm } from '../authForms'
 import { Navigate } from 'react-router'
 import LoginAnimation from './LoginAnimation'
 import { selectToken } from '../../model/authSlice'
@@ -21,7 +21,7 @@ export const Login = () => {
       </div>
       <div className="card-footer d-flex justify-content-center">
         <p>
-          Нет аккаунта? <a href="/"> Регистрация</a>
+          Нет аккаунта? <a href="/signup"> Регистрация</a>
         </p>
       </div>
     </div>
