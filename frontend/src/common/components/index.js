@@ -1,7 +1,7 @@
 export { Header } from './Header'
 export { Loader } from './Loader'
 export { LoadingSpinner } from './LoadingSpinner'
-export { LoginForm } from './LoginForm'
+export { LoginForm } from '@/features/auth/ui/authForms/LoginForm'
 export { LogOutButton } from './LogOutButton'
 export { ModalWrapper } from './ModalWrapper'
 export { ShowModalButton } from './ShowModalButton'
