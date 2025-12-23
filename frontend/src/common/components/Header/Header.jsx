@@ -9,7 +9,7 @@ export const Header = () => {
   return (
     <Navbar className="border-bottom">
       <div className="d-flex justify-content-between w-100 ps-3 pe-3">
-        <Navbar.Brand className="d-none d-sm-flex">СВЯЗЬ 🤙</Navbar.Brand>
+        <Navbar.Brand href='/' className="d-none d-sm-flex">СВЯЗЬ 🤙</Navbar.Brand>
 
         {token && <LogOutButton />}
       </div>
