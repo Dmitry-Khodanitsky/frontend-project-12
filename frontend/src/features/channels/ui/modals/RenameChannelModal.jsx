@@ -1,7 +1,7 @@
 import { modalState, closeModal } from '@/app/model/uiSlice'
 import { useRenameChannelMutation } from '../../api/channelsApi'
 import { useSelector, useDispatch } from 'react-redux'
-import { useNotification } from '@/app/model/NotifyContext'
+import { toast } from 'react-toastify'
 import { ChannelForm } from '../ChannelForm'
 import { useChannelByIdSelector } from '@/common/hooks'
 import { useTranslation } from 'react-i18next'
@@ -16,8 +16,6 @@ export const RenameChannelModal = () => {
   //Получение имени канала, который хотим переименовать
   const channel = useChannelByIdSelector(extra?.id)
 
-  const showNotification = useNotification()
-
   const { t } = useTranslation()
 
   if (type !== 'renameChannel' || !isOpened) return null
@@ -28,9 +26,9 @@ export const RenameChannelModal = () => {
     try {
       await renameChannel({ id: extra.id, name: values.name }).unwrap()
       dispatch(closeModal())
-      showNotification(t('notifications.success.renameChannel'), 'success')
+      toast.success(t('notifications.success.renameChannel'))
     } catch (err) {
-      showNotification(t('errors.renameChannel', { error: err.data }), 'danger')
+      toast.error(t('errors.renameChannel', { error: err.data }))
     }
   }
 

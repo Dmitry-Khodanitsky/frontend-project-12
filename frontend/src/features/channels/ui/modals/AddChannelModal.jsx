@@ -3,7 +3,7 @@ import { modalState, closeModal } from '@/app/model/uiSlice'
 import { useAddChannelMutation } from '@/features/channels/api/channelsApi'
 import { ModalButtons, ModalWrapper } from '@/common/components'
 import { useChannelId } from '@/common/hooks'
-import { useNotification } from '@/app/model/NotifyContext'
+import { toast } from 'react-toastify'
 import { ChannelForm } from '../ChannelForm'
 import { useTranslation } from 'react-i18next'
 export const AddChannelModal = () => {
@@ -16,8 +16,6 @@ export const AddChannelModal = () => {
   const handleClose = () => dispatch(closeModal())
   const { isOpened, type } = useSelector(modalState)
 
-  const showNotification = useNotification()
-
   const { t } = useTranslation()
 
   if (type !== 'addChannel' || !isOpened) return null
@@ -27,9 +25,9 @@ export const AddChannelModal = () => {
       const { id: channelId } = await addChannel(channelName).unwrap()
       handleClose()
       setCurrentChannelId(channelId)
-      showNotification(t('notifications.success.addChannel'), 'success')
+      toast.success(t('notifications.success.addChannel'))
     } catch (err) {
-      showNotification(t('errors.addChannel', { error: err.data }), 'danger')
+      toast.error(t('errors.addChannel', { error: err.data }))
     }
   }
 

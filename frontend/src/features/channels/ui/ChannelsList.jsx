@@ -1,11 +1,11 @@
 import { Nav } from 'react-bootstrap'
-import { useEffect, useTransition } from 'react'
+import { useEffect } from 'react'
 import { useGetChannelsQuery } from '@/features/channels/api/channelsApi'
 import { useScrollTo, useChannelId } from '@/common/hooks'
 import { Loader, ShowModalButton, ErrorMessage } from '@/common/components'
 import ChannelItem from './ChannelItem'
 import { AddChannelModal } from './modals/'
-import { useNotification } from '@/app/model/NotifyContext'
+import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { openModal } from '@/app/model/uiSlice'
 import { useTranslation } from 'react-i18next'
@@ -14,7 +14,6 @@ export const ChannelsList = () => {
   const { data: channels, isError, isLoading } = useGetChannelsQuery()
   const { activeChannelId } = useChannelId()
   const activeChannelRef = useScrollTo(activeChannelId)
-  const showNotification = useNotification()
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
@@ -24,7 +23,7 @@ export const ChannelsList = () => {
 
   useEffect(() => {
     if (isError) {
-      showNotification(t('error.channels'), 'danger')
+      toast.error(t('error.channels'))
     }
   }, [isError])
 

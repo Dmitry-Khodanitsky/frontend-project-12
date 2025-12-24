@@ -1,7 +1,7 @@
 import { modalState, closeModal } from '@/app/model/uiSlice'
 import { useRemoveChannelMutation } from '../../api/channelsApi'
 import { useSelector, useDispatch } from 'react-redux'
-import { useNotification } from '@/app/model/NotifyContext'
+import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
 import { ModalWrapper, ModalButtons } from '@/common/components'
 
@@ -9,7 +9,6 @@ export const DeleteChannelModal = () => {
   const { isOpened, type, extra } = useSelector(modalState)
   const dispatch = useDispatch()
   const [removeChannel, { isLoading }] = useRemoveChannelMutation()
-  const showNotification = useNotification()
   const { t } = useTranslation()
 
   if (type !== 'removeChannel' || !isOpened) return null
@@ -19,9 +18,9 @@ export const DeleteChannelModal = () => {
       await removeChannel(extra.id).unwrap()
       dispatch(closeModal())
 
-      showNotification(t('notifications.success.removeChannel'), 'success')
+      toast.success(t('notifications.success.removeChannel'))
     } catch (err) {
-      showNotification(t('errors.removeChannel', { error: err.data }), 'danger')
+      toast.error(t('errors.removeChannel', { error: err.data }))
     }
   }
 

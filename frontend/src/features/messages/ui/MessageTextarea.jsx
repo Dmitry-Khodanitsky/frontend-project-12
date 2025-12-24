@@ -4,14 +4,14 @@ import { useSelector } from 'react-redux'
 import { selectUser } from '@/features/auth/model/authSlice'
 import { LoadingSpinner } from '@/common/components'
 import { useSendMessageMutation } from '../api/messagesApi'
-import { useNotification } from '@/app/model/NotifyContext'
+import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
 
 const MessageTextarea = ({ channel }) => {
   const [sendMessage, { isLoading: isSending }] = useSendMessageMutation()
 
   const currentUser = useSelector(selectUser)
-  const showNotification = useNotification()
+
   const { t } = useTranslation()
 
   if (!channel) return null
@@ -29,10 +29,7 @@ const MessageTextarea = ({ channel }) => {
           await sendMessage(newMessage).unwrap()
           resetForm()
         } catch (err) {
-          showNotification(
-            t('errors.sendingError', { error: err.data }),
-            'danger'
-          )
+          toast.error(t('errors.sendingError', { error: err.data }))
         }
       }}
     >

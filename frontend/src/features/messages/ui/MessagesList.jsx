@@ -2,7 +2,7 @@ import MessageItem from './MessageItem'
 import { Loader, ErrorMessage } from '@/common/components/'
 import { useChannelMessages, useScrollTo } from '@/common/hooks'
 import { useGetChannelsQuery } from '@/features/channels/api/channelsApi'
-import { useNotification } from '@/app/model/NotifyContext'
+import { toast } from 'react-toastify'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -13,7 +13,6 @@ const MessagesList = ({ channelId }) => {
     error: messagesError,
     isLoading,
   } = useChannelMessages(channelId)
-  const showNotification = useNotification()
 
   const lastMessageRef = useScrollTo(channelMessages, 'auto')
 
@@ -22,7 +21,7 @@ const MessagesList = ({ channelId }) => {
   useEffect(() => {
     if (channelsError) return
     if (messagesError) {
-      showNotification(t('errors.messages'), 'danger')
+      toast.error(t('errors.messages'))
     }
   }, [channelsError, messagesError])
 
