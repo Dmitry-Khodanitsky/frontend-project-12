@@ -1,5 +1,5 @@
 import { Nav } from 'react-bootstrap'
-import { useEffect } from 'react'
+import { useEffect, useTransition } from 'react'
 import { useGetChannelsQuery } from '@/features/channels/api/channelsApi'
 import { useScrollTo, useChannelId } from '@/common/hooks'
 import { Loader, ShowModalButton, ErrorMessage } from '@/common/components'
@@ -8,6 +8,7 @@ import { AddChannelModal } from './modals/'
 import { useNotification } from '@/app/model/NotifyContext'
 import { useDispatch } from 'react-redux'
 import { openModal } from '@/app/model/uiSlice'
+import { useTranslation } from 'react-i18next'
 
 export const ChannelsList = () => {
   const { data: channels, isError, isLoading } = useGetChannelsQuery()
@@ -15,6 +16,7 @@ export const ChannelsList = () => {
   const activeChannelRef = useScrollTo(activeChannelId)
   const showNotification = useNotification()
   const dispatch = useDispatch()
+  const { t } = useTranslation()
 
   //хуки и обработчики для работы с модальным окном добавления каналов через slice
   const handleOpen = () =>
@@ -22,7 +24,7 @@ export const ChannelsList = () => {
 
   useEffect(() => {
     if (isError) {
-      showNotification('Ошибка, каналы не загрузились', 'danger')
+      showNotification(t('error.channels'), 'danger')
     }
   }, [isError])
 
@@ -32,16 +34,15 @@ export const ChannelsList = () => {
       style={{ width: '20%', minWidth: '120px' }}
     >
       <div className="d-flex align-items-center justify-content-between bg-dark-subtle p-3 shadow">
-        <b>Каналы</b>
+        <b>{t('chat.channelsTitle')}</b>
         <ShowModalButton onClick={handleOpen} text={'＋'} />
-        {/* убрали пропсы из модалки */}
         <AddChannelModal />
       </div>
 
       {isLoading ? (
         <Loader />
       ) : isError ? (
-        <ErrorMessage message={'Ошибка, каналы не загрузились'} />
+        <ErrorMessage message={t('error.channels')} />
       ) : (
         <div className="flex-grow-1 overflow-auto">
           <Nav

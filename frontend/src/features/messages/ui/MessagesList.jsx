@@ -4,6 +4,7 @@ import { useChannelMessages, useScrollTo } from '@/common/hooks'
 import { useGetChannelsQuery } from '@/features/channels/api/channelsApi'
 import { useNotification } from '@/app/model/NotifyContext'
 import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const MessagesList = ({ channelId }) => {
   const { error: channelsError } = useGetChannelsQuery()
@@ -16,16 +17,17 @@ const MessagesList = ({ channelId }) => {
 
   const lastMessageRef = useScrollTo(channelMessages, 'auto')
 
+  const { t } = useTranslation()
+
   useEffect(() => {
     if (channelsError) return
     if (messagesError) {
-      showNotification('Не получилось загрузить сообщения', 'danger')
+      showNotification(t('errors.messages'), 'danger')
     }
   }, [channelsError, messagesError])
 
   if (isLoading) return <Loader />
-  if (messagesError)
-    return <ErrorMessage message={'Не получилось загрузить сообщения'} />
+  if (messagesError) return <ErrorMessage message={t('errors.messages')} />
 
   return (
     <div style={{ minHeight: '100%' }}>

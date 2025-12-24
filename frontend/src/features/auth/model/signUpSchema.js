@@ -1,18 +1,19 @@
 import * as yup from 'yup'
 
-export const signUpSchema = yup.object({
-  username: yup
-    .string()
-    .required('Обязательное поле')
-    .min(3, 'От 3 до 20 символов')
-    .max(20, 'От 3 до 20 символов'),
-  password: yup
-    .string()
-    .required('Обязательное поле')
-    .min(6, 'От 6 до 20 символов')
-    .max(20, 'От 6 до 20 символов'),
-  passwordConfirmation: yup
-    .string()
-    .required('Обязательное поле')
-    .oneOf([yup.ref('password')], 'Пароли должны совпадать'),
-})
+export const getSignUpSchema = (t) =>
+  yup.object({
+    username: yup
+      .string()
+      .required(t('errors.required'))
+      .min(3, t('errors.loginSymbols'))
+      .max(20, t('errors.loginSymbols')),
+    password: yup
+      .string()
+      .required(t('errors.required'))
+      .min(6, t('errors.passwordSymbols'))
+      .max(20, t('errors.passwordSymbols')),
+    passwordConfirmation: yup
+      .string()
+      .required(t('errors.required'))
+      .oneOf([yup.ref('password')], t('errors.confirmPassword')),
+  })

@@ -2,13 +2,15 @@ import { Formik, Form, Field } from 'formik'
 import { useMemo } from 'react'
 import { getChannelsValidationSchema } from '@/features/channels/model/channelSchema'
 import { useGetChannelsQuery } from '@/features/channels/api/channelsApi'
+import { useTranslation } from 'react-i18next'
 
 export const ChannelForm = ({ handleSubmit, children, initialValue = '' }) => {
   const { data: channels } = useGetChannelsQuery()
+  const { t } = useTranslation()
   // оборачиваем функцию в useMemo чтобы результат ее вычисления пересчитывался только при изменении channels
   //передаем channels для поиска дубликатов названий каналов
   const channelSchema = useMemo(
-    () => getChannelsValidationSchema(channels || []),
+    () => getChannelsValidationSchema(channels || [], t),
     [channels]
   )
   return (
@@ -31,7 +33,7 @@ export const ChannelForm = ({ handleSubmit, children, initialValue = '' }) => {
             <Field
               id="name"
               name="name"
-              placeholder="Название канала"
+              placeholder={t('common.placeholders.channelName')}
               className={`form-control ${errors.name ? 'is-invalid' : ''} mb-3`}
               //Тут используется ручное управление формой и вызов обработчика событий
               onChange={(e) => {
@@ -44,7 +46,7 @@ export const ChannelForm = ({ handleSubmit, children, initialValue = '' }) => {
               }}
             />
 
-            <label htmlFor="name">Название канала</label>
+            <label htmlFor="name">{t('common.placeholders.channelName')}</label>
             {errors.name && (
               <div className="invalid-feedback d-block">{errors.name}</div>
             )}

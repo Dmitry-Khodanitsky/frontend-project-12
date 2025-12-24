@@ -5,12 +5,15 @@ import { selectUser } from '@/features/auth/model/authSlice'
 import { LoadingSpinner } from '@/common/components'
 import { useSendMessageMutation } from '../api/messagesApi'
 import { useNotification } from '@/app/model/NotifyContext'
+import { useTranslation } from 'react-i18next'
 
 const MessageTextarea = ({ channel }) => {
   const [sendMessage, { isLoading: isSending }] = useSendMessageMutation()
 
   const currentUser = useSelector(selectUser)
   const showNotification = useNotification()
+  const { t } = useTranslation()
+
   if (!channel) return null
 
   return (
@@ -26,7 +29,10 @@ const MessageTextarea = ({ channel }) => {
           await sendMessage(newMessage).unwrap()
           resetForm()
         } catch (err) {
-          showNotification(`Ошибка отправки: ${err.data}`, 'danger')
+          showNotification(
+            t('errors.sendingError', { error: err.data }),
+            'danger'
+          )
         }
       }}
     >
@@ -46,7 +52,9 @@ const MessageTextarea = ({ channel }) => {
             as="textarea"
             rows="5"
             className="w-100 border border-0 bg-dark-subtle "
-            placeholder={`Написать в ${channel.name}`}
+            placeholder={t('chat.messagePlaceholder', {
+              channelName: channel.name,
+            })}
           />
 
           <Button
@@ -54,7 +62,7 @@ const MessageTextarea = ({ channel }) => {
             variant="outline-primary"
             disabled={!values.textarea.trim()} // неактивна если поле пустое или только пробелы
           >
-            {isSending ? <LoadingSpinner /> : 'Отправить'}
+            {isSending ? <LoadingSpinner /> : t('common.send')}
           </Button>
         </Form>
       )}

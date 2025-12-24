@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { openModal } from '@/app/model/uiSlice'
 import { memo } from 'react'
 import { RenameChannelModal, DeleteChannelModal } from './modals/'
+import { useTranslation } from 'react-i18next'
 
 export const ChannelDropdown = memo(({ id }) => {
   // Состояние модальных окон и обработчики
@@ -12,14 +13,15 @@ export const ChannelDropdown = memo(({ id }) => {
   const handleOpenRenameModal = () =>
     dispatch(openModal({ type: 'renameChannel', channelId: id }))
 
+  const { t } = useTranslation()
   return (
     <>
       <Dropdown.Menu drop="end" className="w-25" variant="dark">
         <Dropdown.Item as="button" onClick={handleOpenRenameModal}>
-          Переименовать
+          {t('modals.renameChannel.rename')}
         </Dropdown.Item>
         <Dropdown.Item as="button" onClick={handleOpenRemoveModal}>
-          Удалить
+          {t('modals.removeChannel.submit')}
         </Dropdown.Item>
       </Dropdown.Menu>
 

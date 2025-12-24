@@ -2,6 +2,7 @@ import { Button } from 'react-bootstrap'
 import { LoadingSpinner } from '@/common/components'
 import { useDispatch } from 'react-redux'
 import { closeModal } from '@/app/model/uiSlice'
+import { useTranslation } from 'react-i18next'
 
 export const ModalButtons = ({
   isLoading,
@@ -9,6 +10,7 @@ export const ModalButtons = ({
   type = 'submit',
   onClick,
 }) => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const handleClose = () => dispatch(closeModal())
   return (
@@ -19,7 +21,7 @@ export const ModalButtons = ({
         variant="secondary"
         onClick={handleClose}
       >
-        Отменить
+        {t('common.cancel')}
       </Button>
       <Button
         type={type}

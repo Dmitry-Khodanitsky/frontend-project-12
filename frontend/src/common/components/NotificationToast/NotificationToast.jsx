@@ -1,12 +1,9 @@
 import Toast from 'react-bootstrap/Toast'
 import ToastContainer from 'react-bootstrap/ToastContainer'
-import ReactDom from 'react-dom'
+import { useTranslation } from 'react-i18next'
 
-export const NotificationToast = ({
-  notifications,
-  onRemove,
-  from = 'СВЯЗЬ 🤙',
-}) => {
+export const NotificationToast = ({ notifications, onRemove }) => {
+  const { t } = useTranslation()
   return (
     <ToastContainer
       position="bottom-end"
@@ -24,9 +21,9 @@ export const NotificationToast = ({
           className="mb-2"
         >
           <Toast.Header>
-            <strong className="me-auto">{from}</strong>
+            <strong className="me-auto">{t('common.appName')}</strong>
             {/* сделать показ времени ago */}
-            <small>11 mins ago</small>
+            {/* <small>11 mins ago</small> */}
           </Toast.Header>
           <Toast.Body>{notification.message}</Toast.Body>
         </Toast>

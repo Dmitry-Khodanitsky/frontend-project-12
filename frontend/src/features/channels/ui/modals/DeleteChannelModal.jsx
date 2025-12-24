@@ -2,7 +2,7 @@ import { modalState, closeModal } from '@/app/model/uiSlice'
 import { useRemoveChannelMutation } from '../../api/channelsApi'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNotification } from '@/app/model/NotifyContext'
-
+import { useTranslation } from 'react-i18next'
 import { ModalWrapper, ModalButtons } from '@/common/components'
 
 export const DeleteChannelModal = () => {
@@ -10,6 +10,7 @@ export const DeleteChannelModal = () => {
   const dispatch = useDispatch()
   const [removeChannel, { isLoading }] = useRemoveChannelMutation()
   const showNotification = useNotification()
+  const { t } = useTranslation()
 
   if (type !== 'removeChannel' || !isOpened) return null
 
@@ -18,17 +19,17 @@ export const DeleteChannelModal = () => {
       await removeChannel(extra.id).unwrap()
       dispatch(closeModal())
 
-      showNotification('Канал успешно удален', 'success')
+      showNotification(t('notifications.success.removeChannel'), 'success')
     } catch (err) {
-      showNotification(`Ошибка удаления канала: ${err.data}`, 'danger')
+      showNotification(t('errors.removeChannel', { error: err.data }), 'danger')
     }
   }
 
   return (
-    <ModalWrapper visible={isOpened} title="Удалить канал?">
+    <ModalWrapper visible={isOpened} title={t('modals.removeChannel.title')}>
       <ModalButtons
         isLoading={isLoading}
-        title="Удалить"
+        title={t('modals.removeChannel.submit')}
         type="button"
         onClick={handleRemove}
       />

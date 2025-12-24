@@ -5,7 +5,7 @@ import { ModalButtons, ModalWrapper } from '@/common/components'
 import { useChannelId } from '@/common/hooks'
 import { useNotification } from '@/app/model/NotifyContext'
 import { ChannelForm } from '../ChannelForm'
-
+import { useTranslation } from 'react-i18next'
 export const AddChannelModal = () => {
   // использовать состояние uiSlice для управления видимостью модалки
   const [addChannel, { isLoading }] = useAddChannelMutation()
@@ -18,6 +18,8 @@ export const AddChannelModal = () => {
 
   const showNotification = useNotification()
 
+  const { t } = useTranslation()
+
   if (type !== 'addChannel' || !isOpened) return null
 
   const handleSubmit = async (channelName) => {
@@ -25,16 +27,19 @@ export const AddChannelModal = () => {
       const { id: channelId } = await addChannel(channelName).unwrap()
       handleClose()
       setCurrentChannelId(channelId)
-      showNotification('Канал добавлен', 'success')
+      showNotification(t('notifications.success.addChannel'), 'success')
     } catch (err) {
-      showNotification(`Ошибка добавления канала: ${err.data}`, 'danger')
+      showNotification(t('errors.addChannel', { error: err.data }), 'danger')
     }
   }
 
   return (
-    <ModalWrapper visible={isOpened} title={'Добавить канал'}>
+    <ModalWrapper visible={isOpened} title={t('modals.addChannel.title')}>
       <ChannelForm handleSubmit={handleSubmit}>
-        <ModalButtons isLoading={isLoading} title="Добавить" />
+        <ModalButtons
+          isLoading={isLoading}
+          title={t('modals.addChannel.submit')}
+        />
       </ChannelForm>
     </ModalWrapper>
   )

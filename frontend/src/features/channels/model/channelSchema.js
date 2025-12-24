@@ -1,20 +1,19 @@
 import * as yup from 'yup'
 
-export const getChannelsValidationSchema = (channels) => {
-  const channelSchema = yup.object({
+export const getChannelsValidationSchema = (channels, t) => {
+  return yup.object({
     name: yup
       .string()
-      .required('Введите название')
-      .min(3, 'От 3 до 20 символов')
-      .max(20, 'От 3 до 20 символов')
-      .test('unique-name', 'Такой канал уже существует', (channelName) => {
-        const isDublicate = channels.some(
+      .trim()
+      .required(t('errors.required'))
+      .min(3, t('errors.loginSymblos'))
+      .max(20, t('errors.loginSymblos'))
+      .test('unique-name', t('errors.userExists'), (channelName) => {
+        if (!channelName) return true
+        const isDuplicate = channels.some(
           (channel) => channel.name.toLowerCase() === channelName.toLowerCase()
         )
-        // если дубликат есть, то это true, и тогда результат test должен быть false
-        return !isDublicate
+        return !isDuplicate
       }),
   })
-
-  return channelSchema
 }
