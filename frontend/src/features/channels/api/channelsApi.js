@@ -46,7 +46,8 @@ export const channelsApi = baseApi.injectEndpoints({
                 (channel) => channel.id === payload.id
               )
               if (channel) {
-                channel.name = payload.name
+                // Обязательно очищаем имя, пришедшее из сокета
+                channel.name = profanityClean(payload.name)
               }
             })
           }
@@ -106,7 +107,7 @@ export const channelsApi = baseApi.injectEndpoints({
       query: ({ id, name }) => ({
         url: `channels/${id}`,
         method: 'PATCH',
-        body: { name },
+        body: { name: profanityClean(name) },
       }),
       invalidatesTags: (result, error, { id }) => [{ type: 'channels', id }],
     }),
