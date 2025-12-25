@@ -16,7 +16,7 @@ export default {
         channelName: 'Название канала',
         password: 'Пароль',
         username: 'Ваш ник',
-        registerUsername: 'Имя пользователя'
+        registerUsername: 'Имя пользователя',
       },
     },
     // Ошибки
