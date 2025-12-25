@@ -1,5 +1,5 @@
 import { ShakaAnimation } from '@/common/components/ShakaAnimation'
-export const AuthWrapper = ({ logoAnimation, form, footerLink }) => {
+export const AuthWrapper = ({ form, footerLink }) => {
   return (
     <div className="card col-12 col-md-8 col-xxl-6 align-self-center">
       <div className="card-body row p-5">
