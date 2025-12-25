@@ -1,5 +1,6 @@
 import { baseApi } from '@/app/api/baseApi'
 import { socket } from '@/common/services/socket'
+import { profanityClean } from '@/common/services/profanity'
 
 export const channelsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -31,7 +32,11 @@ export const channelsApi = baseApi.injectEndpoints({
             //Просто добавляем новое сообщение в существующий массив в кэше
             // RTK Query сам уведомит компоненты об изменениях
             updateCachedData((channels) => {
-              channels.push(payload)
+              const cleanChannelName = {
+                ...payload,
+                name: profanityClean(payload.name),
+              }
+              channels.push(cleanChannelName)
             })
           }
 
@@ -75,7 +80,7 @@ export const channelsApi = baseApi.injectEndpoints({
       query: (channel) => ({
         url: 'channels',
         method: 'POST',
-        body: channel,
+        body: { ...channel, name: profanityClean(channel.name) },
       }),
     }),
     removeChannel: builder.mutation({
