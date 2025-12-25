@@ -4,7 +4,7 @@ const uiSlice = createSlice({
   name: 'ui',
   initialState: {
     currentChannelId: '1',
-    defaultChannekId: '1',
+    defaultChannelId: '1',
     modal: {
       isOpened: false,
       type: null, // addChannel, removeChannel, renameChannel
@@ -31,5 +31,5 @@ const uiSlice = createSlice({
 
 export default uiSlice.reducer
 export const { setCurrentChannelId, openModal, closeModal } = uiSlice.actions
-export const currentChannenId = (state) => state.ui.currentChannelId
+export const currentChannelId = (state) => state.ui.currentChannelId
 export const modalState = (state) => state.ui.modal

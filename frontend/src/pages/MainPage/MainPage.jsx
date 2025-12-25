@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router'
 import { selectToken } from '@/features/auth/model/authSlice'
-import { currentChannenId, setCurrentChannelId } from '@/app/model/uiSlice'
+import { currentChannelId, setCurrentChannelId } from '@/app/model/uiSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { Tab, Container } from 'react-bootstrap'
 import { ChannelsList } from '@/features/channels/'
@@ -9,7 +9,7 @@ import { MessagesSection } from '@/features/messages/'
 export const MainPage = () => {
   const token = useSelector(selectToken)
   const dispatch = useDispatch()
-  const activeChannelId = useSelector(currentChannenId)
+  const activeChannelId = useSelector(currentChannelId)
 
   const handleSelect = (id) => {
     dispatch(setCurrentChannelId(id))
