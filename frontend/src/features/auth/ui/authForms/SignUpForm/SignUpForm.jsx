@@ -56,7 +56,7 @@ export const SignUpForm = () => {
               <div className="invalid-tooltip">{errors.username}</div>
             )}
             <label htmlFor="username">
-              {t('common.placeholders.username')}
+              {t('common.placeholders.registerUsername')}
             </label>
           </div>
           <div className="form-floating mb-3">

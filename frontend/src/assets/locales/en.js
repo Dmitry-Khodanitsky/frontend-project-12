@@ -13,6 +13,7 @@ export default {
         channelName: 'Channel name',
         password: 'Password',
         username: 'Username',
+        registerUsername: 'Username',
       },
     },
     errors: {
