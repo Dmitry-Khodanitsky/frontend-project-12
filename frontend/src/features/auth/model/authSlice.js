@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getSocket } from '@/common/services/socket/socket'
 
 const authSlice = createSlice({
   name: 'auth',
