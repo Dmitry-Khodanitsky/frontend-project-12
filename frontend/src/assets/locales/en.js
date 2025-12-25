@@ -1,6 +1,7 @@
 export default {
   translation: {
     common: {
+      testName: 'Hexlet Chat',
       appName: 'CONNECTION 🤙',
       save: 'Save',
       cancel: 'Cancel',
