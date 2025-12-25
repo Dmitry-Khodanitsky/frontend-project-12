@@ -11,7 +11,7 @@ export const ChannelForm = ({ handleSubmit, children, initialValue = '' }) => {
   //передаем channels для поиска дубликатов названий каналов
   const channelSchema = useMemo(
     () => getChannelsValidationSchema(channels || [], t),
-    [channels]
+    [channels, t]
   )
   return (
     <Formik

@@ -32,3 +32,5 @@ export const ChannelDropdown = memo(({ id }) => {
     </>
   )
 })
+
+ChannelDropdown.displayName = 'ChannelDropdown'
