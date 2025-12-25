@@ -107,8 +107,8 @@ export const SignUpForm = () => {
 
             {/* обработка ошибки сервера */}
             {isError && (
-              <div className="invalid-tooltip">
-                {t('erros.userExists')}
+              <div className="invalid-tooltip d-block">
+                {t('errors.userExists')}
               </div>
             )}
           </div>
