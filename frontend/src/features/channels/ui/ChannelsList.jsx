@@ -4,7 +4,11 @@ import { useGetChannelsQuery } from '@/features/channels/api/channelsApi'
 import { useScrollTo, useChannelId } from '@/common/hooks'
 import { Loader, ShowModalButton, ErrorMessage } from '@/common/components'
 import ChannelItem from './ChannelItem'
-import { AddChannelModal } from './modals/'
+import {
+  AddChannelModal,
+  RenameChannelModal,
+  DeleteChannelModal,
+} from './modals/'
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { openModal } from '@/app/model/uiSlice'
@@ -35,7 +39,6 @@ export const ChannelsList = () => {
       <div className="d-flex align-items-center justify-content-between bg-dark-subtle p-3 shadow">
         <b>{t('chat.channelsTitle')}</b>
         <ShowModalButton onClick={handleOpen} text={'+'} />
-        <AddChannelModal />
       </div>
 
       {isLoading ? (
@@ -63,6 +66,11 @@ export const ChannelsList = () => {
           </Nav>
         </div>
       )}
+      {/* Модальное окно для удаления канала */}
+      <DeleteChannelModal />
+      {/* Модальное окно для переименовывания канала  */}
+      <RenameChannelModal />
+      <AddChannelModal />
     </aside>
   )
 }
