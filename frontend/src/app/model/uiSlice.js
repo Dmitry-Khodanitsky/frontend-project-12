@@ -14,7 +14,6 @@ const uiSlice = createSlice({
   reducers: {
     setCurrentChannelId: (state, { payload }) => {
       state.currentChannelId = payload
-      console.log('Current channel: ', payload)
     },
     openModal: (state, { payload }) => {
       const { type, channelId } = payload
@@ -26,7 +25,6 @@ const uiSlice = createSlice({
       state.modal.isOpened = false
       state.modal.type = null
       state.modal.extra = null
-      console.log('модалка закрыта')
     },
   },
 })
