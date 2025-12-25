@@ -28,7 +28,10 @@ export const MainPage = () => {
       >
         <div className="d-flex h-100">
           <ChannelsList />
-          <MessagesSection activeChannelId={activeChannelId} />
+          <MessagesSection
+            activeChannelId={activeChannelId}
+            key={activeChannelId}
+          />
         </div>
       </Tab.Container>
     </Container>

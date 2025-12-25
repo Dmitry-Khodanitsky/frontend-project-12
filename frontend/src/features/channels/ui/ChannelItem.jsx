@@ -2,13 +2,10 @@ import { Nav, Dropdown, ButtonGroup, Button } from 'react-bootstrap'
 import { ChannelDropdown } from './ChannelDropdown'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useChannelId } from '@/common/hooks'
 
 const ChannelItem = ({ channel, ref }) => {
   const [isHovered, setIsHovered] = useState(false)
   const { t } = useTranslation()
-
-  const { setCurrentChannelId, activeChannelId } = useChannelId()
 
   return (
     <Nav.Item
@@ -20,13 +17,12 @@ const ChannelItem = ({ channel, ref }) => {
     >
       <Nav.Link
         eventKey={channel.id}
-        active={channel.id === activeChannelId}
-        onClick={() => setCurrentChannelId(channel.id)}
         className="d-flex p-1 border-0 rounded-0"
         style={{ '--bs-nav-pills-link-active-bg': '#1a1d20' }}
       >
         <ButtonGroup className="w-100 border-0">
           <Button
+            style={{ pointerEvents: 'none' }}
             variant="none"
             className="text-start text-truncate border-0 rounded-0  flex-grow-1"
           >
