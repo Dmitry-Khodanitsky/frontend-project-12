@@ -3,6 +3,8 @@ import ShakaAnimationData from '@/assets/lootie/shaka.json'
 
 export const ShakaAnimation = () => {
   return (
-    <Lottie animationData={ShakaAnimationData} loop={true} autoplay={true} />
+    <div className="w-75 w-md-100">
+      <Lottie animationData={ShakaAnimationData} loop={true} />
+    </div>
   )
 }
