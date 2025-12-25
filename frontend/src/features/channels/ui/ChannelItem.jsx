@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useChannelId } from '@/common/hooks'
 
 const ChannelItem = ({ channel, ref }) => {
-  const [isHovered, setIsHovered] = useState(false)
+  //const [isHovered, setIsHovered] = useState(false)
   const { t } = useTranslation()
   const { setCurrentChannelId, activeChannelId } = useChannelId()
   const isActive = channel.id === activeChannelId
@@ -14,8 +14,8 @@ const ChannelItem = ({ channel, ref }) => {
     <Nav.Item as="li" className="w-100" ref={ref}>
       <ButtonGroup
         className="w-100"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        // onMouseEnter={() => setIsHovered(true)}
+        // onMouseLeave={() => setIsHovered(false)}
       >
         <Button
           variant={isActive ? 'secondary' : 'none'}
@@ -26,7 +26,8 @@ const ChannelItem = ({ channel, ref }) => {
           {channel.name}
         </Button>
 
-        {channel.removable && isHovered && (
+        {/* channel.removable && isHovered  */}
+        {channel.removable && (
           <Dropdown as={ButtonGroup}>
             <Dropdown.Toggle
               split
