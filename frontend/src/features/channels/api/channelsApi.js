@@ -1,5 +1,5 @@
 import { baseApi } from '@/app/api/baseApi'
-import { socket } from '@/common/services/socket'
+import { subscribeToEvent } from '@/common/services/socket/subscribeToEvent'
 import { profanityClean } from '@/common/services/profanity'
 
 export const channelsApi = baseApi.injectEndpoints({
@@ -23,7 +23,6 @@ export const channelsApi = baseApi.injectEndpoints({
         try {
           // Сначала ждем завершения обработки первоначального запроса при монтировании компонента
           await cacheDataLoaded
-          console.log('Соединение с каналами установлено', socket.id)
 
           // Когда данные получены из соединения с сервером,
           //Обновляем результат запроса полученным сообщением
@@ -60,19 +59,29 @@ export const channelsApi = baseApi.injectEndpoints({
               )
             })
           }
-          socket.on('newChannel', handleNewChannel)
-          socket.on('renameChannel', handleRenameChannel) //слушатель переименовывания канала
-          socket.on('removeChannel', handleRemoveChannel) //слушатель удаления канала
+          const unsubscribeNewChannel = subscribeToEvent(
+            'newChannel',
+            handleNewChannel
+          )
+          const unsubscribeRemoveChannel = subscribeToEvent(
+            'removeChannel',
+            handleRemoveChannel
+          )
+          const unsubscribeRenameChannel = subscribeToEvent(
+            'renameChannel',
+            handleRenameChannel
+          )
+
+          await cacheEntryRemoved
+          unsubscribeNewChannel()
+          unsubscribeRemoveChannel()
+          unsubscribeRenameChannel()
         } catch (error) {
           // Если HTTP запрос завершился ошибкой, подписка не создастся
           console.log(error)
         }
         // Когда компонент с чатом размонтируется (или данные станут не нужны),
         // RTK Query автоматически выполнит этот код:
-        await cacheEntryRemoved
-        socket.off('newChannel')
-        socket.off('renameChannel')
-        socket.off('removeChannel')
       },
     }),
     // функции мутации

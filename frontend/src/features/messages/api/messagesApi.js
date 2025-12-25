@@ -1,5 +1,5 @@
 import { baseApi } from '@/app/api/baseApi'
-import { socket } from '@/common/services/socket'
+import { subscribeToEvent } from '@/common/services/socket/subscribeToEvent'
 import { profanityClean } from '@/common/services/profanity'
 
 export const channelsApi = baseApi.injectEndpoints({
@@ -15,7 +15,6 @@ export const channelsApi = baseApi.injectEndpoints({
         try {
           // Сначала ждем завершения обработки первоначального запроса при монтировании компонента
           await cacheDataLoaded
-          console.log('Соединение установлено', socket.id)
 
           // Когда данные получены из соединения с сервером,
           //Обновляем результат запроса полученным сообщением
@@ -36,18 +35,24 @@ export const channelsApi = baseApi.injectEndpoints({
               return draft.filter((draft) => draft.id !== payload.id)
             })
           }
-          socket.on('newMessage', handleNewMessage)
-          socket.on('removeMessage', handleRemoveMessage)
+          const unsubscribeNewMessage = subscribeToEvent(
+            'newMessage',
+            handleNewMessage
+          )
+          const unsubscribeRemoveMessage = subscribeToEvent(
+            'removeMessage',
+            handleRemoveMessage
+          )
+
+          // Когда компонент с чатом размонтируется (или данные станут не нужны),
+          // RTK Query автоматически выполнит этот код:
+          await cacheEntryRemoved
+          unsubscribeNewMessage()
+          unsubscribeRemoveMessage()
         } catch (error) {
           // Если HTTP запрос завершился ошибкой, подписка не создастся
-
           console.log(error)
         }
-        // Когда компонент с чатом размонтируется (или данные станут не нужны),
-        // RTK Query автоматически выполнит этот код:
-        await cacheEntryRemoved
-        socket.off('newMessage')
-        socket.off('removeMessage')
       },
     }),
     sendMessage: builder.mutation({
