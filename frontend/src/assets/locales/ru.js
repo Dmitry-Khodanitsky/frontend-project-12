@@ -23,6 +23,7 @@ export default {
       confirmPassword: 'Пароли должны совпадать',
       network: 'Ошибка сети',
       userExists: 'Такой пользователь уже существует',
+      channelExist: 'Такой канал уже существует',
       required: 'Это поле обязательно',
       channels: 'Ошибка, каналы не загрузились',
       addChannel: 'Ошибка добавления канала: {{error}}',

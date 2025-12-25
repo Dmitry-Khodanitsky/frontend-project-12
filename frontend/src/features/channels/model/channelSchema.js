@@ -8,7 +8,7 @@ export const getChannelsValidationSchema = (channels, t) => {
       .required(t('errors.required'))
       .min(3, t('errors.loginSymblos'))
       .max(20, t('errors.loginSymblos'))
-      .test('unique-name', t('errors.userExists'), (channelName) => {
+      .test('unique-name', t('errors.channelExist'), (channelName) => {
         if (!channelName) return true
         const isDuplicate = channels.some(
           (channel) => channel.name.toLowerCase() === channelName.toLowerCase()
