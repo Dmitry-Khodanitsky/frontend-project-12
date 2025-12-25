@@ -13,7 +13,7 @@ export default {
       login: 'Войти',
       registration: 'Регистрация',
       placeholders: {
-        channelName: 'Название канала',
+        channelName: 'Имя канала',
         password: 'Пароль',
         username: 'Ваш ник',
         registerUsername: 'Имя пользователя',

@@ -34,7 +34,7 @@ export const ChannelsList = () => {
     >
       <div className="d-flex align-items-center justify-content-between bg-dark-subtle p-3 shadow">
         <b>{t('chat.channelsTitle')}</b>
-        <ShowModalButton onClick={handleOpen} text={'＋'} />
+        <ShowModalButton onClick={handleOpen} text={'+'} />
         <AddChannelModal />
       </div>
 

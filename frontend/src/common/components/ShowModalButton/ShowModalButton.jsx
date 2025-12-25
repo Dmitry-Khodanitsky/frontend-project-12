@@ -1,15 +1,24 @@
-import { Button } from "react-bootstrap"
+import { Button } from 'react-bootstrap'
 
-export const ShowModalButton = ({onClick, text}) => {
+export const ShowModalButton = ({ onClick, text }) => {
   return (
     <Button
       type="button"
       variant="outline-light"
       size="sm"
       onClick={onClick}
-      className="d-block"
+      style={{
+        width: '24px',
+        height: '24px',
+        padding: 0,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        lineHeight: 1,
+      }}
+      className="p-0"
     >
-      <span className="vertical-align-center">{text}</span>
+      <span style={{ marginBottom: '2px' }}>{text}</span>
     </Button>
   )
 }
