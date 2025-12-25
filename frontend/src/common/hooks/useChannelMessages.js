@@ -2,19 +2,14 @@
 import { useGetMessagesQuery } from '@/features/messages/api/messagesApi'
 
 export const useChannelMessages = (channelId) => {
-  const {
-    data: messages = [],
-    isError,
-    isLoading,
-    isFetching,
-  } = useGetMessagesQuery()
+  const { data: messages = [], isError, isLoading } = useGetMessagesQuery()
   const channelMessages = messages.filter(
     (message) => String(message?.channelId) === String(channelId)
   )
   return {
     channelMessages,
     isError,
-    isLoading: isLoading || isFetching,
+    isLoading: isLoading,
   }
 }
 

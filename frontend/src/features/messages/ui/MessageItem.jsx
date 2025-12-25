@@ -1,5 +1,5 @@
 const MessageItem = ({ username = '', text = '' }) => {
-  const userNameFirstLetter = username ? username[0] : '?'
+  //const userNameFirstLetter = username ? username[0] : '?'
   return (
     <div className="d-flex mb-3">
       {/* Код закоментирован для прохождения тестов */}
