@@ -31,6 +31,7 @@ export const DeleteChannelModal = () => {
         title={t('modals.removeChannel.submit')}
         type="button"
         onClick={handleRemove}
+        variant='danger'
       />
     </ModalWrapper>
   )

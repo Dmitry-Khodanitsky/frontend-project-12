@@ -9,6 +9,7 @@ export const ModalButtons = ({
   title,
   type = 'submit',
   onClick,
+  variant = 'primary',
 }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
@@ -25,7 +26,7 @@ export const ModalButtons = ({
       </Button>
       <Button
         type={type}
-        variant="primary"
+        variant={variant}
         onClick={onClick}
         disabled={isLoading}
       >
