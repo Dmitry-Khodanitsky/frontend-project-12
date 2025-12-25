@@ -1,9 +1,11 @@
 import { Nav, Dropdown, ButtonGroup, Button } from 'react-bootstrap'
 import { ChannelDropdown } from './ChannelDropdown'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const ChannelItem = ({ channel, ref }) => {
   const [isHovered, setIsHovered] = useState(false)
+  const { t } = useTranslation()
 
   return (
     <Nav.Item
@@ -36,7 +38,9 @@ const ChannelItem = ({ channel, ref }) => {
                 split
                 variant="none"
                 className="border-0 rounded-0 text-reset"
-              />
+              >
+                <span className="visually-hidden">{t('modals.dropdown')}</span>
+              </Dropdown.Toggle>
               <ChannelDropdown id={channel.id} />
             </Dropdown>
           )}
