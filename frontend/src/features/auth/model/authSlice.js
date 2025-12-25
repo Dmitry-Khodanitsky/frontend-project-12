@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { disconnectSocket } from '@/common/services/socket/socket'
 
 const authSlice = createSlice({
   name: 'auth',
@@ -20,6 +21,7 @@ const authSlice = createSlice({
       state.username = null
       localStorage.removeItem('token')
       localStorage.removeItem('username')
+      disconnectSocket()
     },
   },
 })
@@ -28,4 +30,3 @@ export default authSlice.reducer
 export const { logOut, setCredentials } = authSlice.actions
 export const selectToken = (state) => state.auth.token
 export const selectUser = (state) => state.auth.username
-
