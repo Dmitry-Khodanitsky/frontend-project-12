@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { disconnectSocket } from '@/common/services/socket/socket'
+import { getSocket } from '@/common/services/socket/socket'
 
 const authSlice = createSlice({
   name: 'auth',
@@ -21,7 +21,6 @@ const authSlice = createSlice({
       state.username = null
       localStorage.removeItem('token')
       localStorage.removeItem('username')
-      disconnectSocket()
     },
   },
 })
