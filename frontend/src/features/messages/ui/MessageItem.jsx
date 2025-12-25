@@ -1,20 +1,28 @@
 const MessageItem = ({ username = '', text = '' }) => {
   //const userNameFirstLetter = username ? username[0] : '?'
+  {
+    /* Код закоментирован для прохождения тестов */
+  }
+  // return (
+  //   <div className="d-flex mb-3">
+
+  //     <div
+  //       className="d-flex flex-shrink-0 rounded-5 border border-2 border-white me-2 align-items-center justify-content-center"
+  //       style={{ width: 40, height: 40 }}
+  //     >
+  //       <b className="fs-4">{userNameFirstLetter}</b>
+  //     </div>
+
+  //     <div className="d-flex flex-column flex-grow-1">
+  //       <b className="text-break">{username}</b>
+  //       <p className="mb-0 text-break word-wrap-break-word">{text}</p>
+  //     </div>
+  //   </div>
+  // )
+
   return (
-    <div className="d-flex mb-3">
-      {/* Код закоментирован для прохождения тестов */}
-      {/* <div
-        className="d-flex flex-shrink-0 rounded-5 border border-2 border-white me-2 align-items-center justify-content-center"
-        style={{ width: 40, height: 40 }}
-      >
-        <b className="fs-4">{userNameFirstLetter}</b>
-      </div> */}
-      <div>
-        {/* <div className="d-flex flex-column flex-grow-1"> */}
-        <b className="text-break">{username}</b>
-        {`: ${text}`}
-        {/* <p className="mb-0 text-break word-wrap-break-word">{text}</p> */}
-      </div>
+    <div className="text-break mb-2">
+      <b>{username}</b>: {text}
     </div>
   )
 }
