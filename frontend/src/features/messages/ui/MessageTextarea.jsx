@@ -46,6 +46,7 @@ const MessageTextarea = ({ channel }) => {
               resize: 'none',
             }}
             name="textarea"
+            aria-label="Новое сообщение"
             as="textarea"
             rows="5"
             className="w-100 border border-0 bg-dark-subtle "
