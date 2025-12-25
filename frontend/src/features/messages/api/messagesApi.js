@@ -2,7 +2,7 @@ import { baseApi } from '@/app/api/baseApi'
 import { subscribeToEvent } from '@/common/services/socket/subscribeToEvent'
 import { profanityClean } from '@/common/services/profanity'
 
-export const channelsApi = baseApi.injectEndpoints({
+export const messagesApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getMessages: builder.query({
       query: () => 'messages',
@@ -75,4 +75,4 @@ export const {
   useGetMessagesQuery,
   useSendMessageMutation,
   useRemoveMessageMutation,
-} = channelsApi
+} = messagesApi
