@@ -1,12 +1,13 @@
 import { baseApi } from '@/app/api/baseApi'
 import { socket } from '@/common/services/socket'
+import { profanityClean } from '@/common/services/profanity'
 
 export const channelsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getMessages: builder.query({
       query: () => 'messages',
       providesTags: ['messages'],
-        //Слушатель сокетов для синхронизации кэша. Обновляет список каналов мгновенно, когда другие пользователи вносят изменения.
+      //Слушатель сокетов для синхронизации кэша. Обновляет список каналов мгновенно, когда другие пользователи вносят изменения.
       async onCacheEntryAdded(
         arg,
         { updateCachedData, cacheDataLoaded, cacheEntryRemoved }
@@ -22,7 +23,11 @@ export const channelsApi = baseApi.injectEndpoints({
             //Просто добавляем новое сообщение в существующий массив в кэше
             // RTK Query сам уведомит компоненты об изменениях
             updateCachedData((draft) => {
-              draft.push(payload)
+              const cleanMessage = {
+                ...payload,
+                body: profanityClean(payload.body),
+              }
+              draft.push(cleanMessage)
             })
           }
 
@@ -49,7 +54,7 @@ export const channelsApi = baseApi.injectEndpoints({
       query: (message) => ({
         url: 'messages',
         method: 'POST',
-        body: message,
+        body: { ...message, body: profanityClean(message.body) },
       }),
     }),
     removeMessage: builder.mutation({
