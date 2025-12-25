@@ -1,3 +1,5 @@
+import { Dropdown } from 'react-bootstrap'
+
 export default {
   translation: {
     // Общие элементы
@@ -12,16 +14,16 @@ export default {
       placeholders: {
         channelName: 'Название канала',
         password: 'Пароль',
-        username: 'Ваш логин',
+        username: 'Ваш ник',
       },
     },
     // Ошибки
     errors: {
       auth: 'Неверное имя пользователя или пароль',
-      passwordSymbols: 'От 6 до 20 символов',
+      passwordSymbols: 'Не менее 6 символов',
       loginSymbols: 'От 3 до 20 символов',
       confirmPassword: 'Пароли должны совпадать',
-      network: 'Ошибка сети',
+      network: 'Ошибка соединения',
       userExists: 'Такой пользователь уже существует',
       channelExist: 'Такой канал уже существует',
       required: 'Это поле обязательно',
@@ -63,12 +65,13 @@ export default {
         title: 'Удалить канал?',
         submit: 'Удалить',
       },
+      dropdown: 'Управление каналом',
     },
     notifications: {
       success: {
-        addChannel: 'Канал добавлен',
-        removeChannel: 'Канал успешно удален',
-        renameChannel: 'Название канала изменено',
+        addChannel: 'Канал создан',
+        removeChannel: 'Канал удален',
+        renameChannel: 'Канал переименован',
       },
     },
   },

@@ -1,7 +1,7 @@
 export default {
   translation: {
     common: {
-      appName: 'INTOUCH 🤙',
+      appName: 'CONNECTION 🤙',
       save: 'Save',
       cancel: 'Cancel',
       send: 'Send',
@@ -11,21 +11,22 @@ export default {
       placeholders: {
         channelName: 'Channel name',
         password: 'Password',
-        username: 'Your login',
+        username: 'Username',
       },
     },
     errors: {
       auth: 'Invalid username or password',
-      passwordSymbols: 'From 6 to 20 characters',
-      loginSymbols: 'From 6 to 20 characters',
+      passwordSymbols: 'At least 6 characters',
+      loginSymbols: 'From 3 to 20 characters',
       confirmPassword: 'Passwords must match',
-      network: 'Network error',
+      network: 'Connection error',
       userExists: 'User already exists',
+      channelExist: 'Channel already exists',
       required: 'This field is required',
       channels: 'Error: failed to load channels',
       addChannel: 'Error adding channel: {{error}}',
       removeChannel: 'Error deleting channel: {{error}}',
-      renameChannel: 'Error: failed to change channel name: {{error}}',
+      renameChannel: 'Error: failed to rename channel: {{error}}',
       messages: 'Failed to load messages',
       sendingError: 'Sending error: {{error}}',
     },
@@ -57,12 +58,13 @@ export default {
         title: 'Delete channel?',
         submit: 'Delete',
       },
+      dropdown: 'Channel settings',
     },
     notifications: {
       success: {
-        addChannel: 'Channel added',
-        removeChannel: 'Channel successfully deleted',
-        renameChannel: 'Channel name changed',
+        addChannel: 'Channel created',
+        removeChannel: 'Channel deleted',
+        renameChannel: 'Channel renamed',
       },
     },
   },
