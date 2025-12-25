@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next'
 import { useChannelId } from '@/common/hooks'
 
 const ChannelItem = ({ channel, ref }) => {
+  // закоментированные строки кода для прохождения тестов.
+  // для прохождения теста элемент управления каналом должен быть виден всегда, а не при наведении мышки на канал
   //const [isHovered, setIsHovered] = useState(false)
   const { t } = useTranslation()
   const { setCurrentChannelId, activeChannelId } = useChannelId()
