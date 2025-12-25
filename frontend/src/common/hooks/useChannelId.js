@@ -1,12 +1,15 @@
 // Хук для получения id активного в данный момент канала и экшен для изменения активного канала
 import { useSelector, useDispatch } from 'react-redux'
-import { currentChannelId, setCurrentChannelId } from '@/app/model/uiSlice'
+import {
+  selectCurrentChannelId,
+  setCurrentChannelId,
+} from '@/app/model/uiSlice'
 
 export const useChannelId = () => {
   const dispatch = useDispatch()
 
   return {
-    activeChannelId: useSelector(currentChannelId),
+    activeChannelId: useSelector(selectCurrentChannelId),
     setCurrentChannelId: (id) => {
       dispatch(setCurrentChannelId(id))
     },
