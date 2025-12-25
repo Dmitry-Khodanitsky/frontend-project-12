@@ -2,16 +2,18 @@ const MessageItem = ({ username = '', text = '' }) => {
   const userNameFirstLetter = username ? username[0] : '?'
   return (
     <div className="d-flex mb-3">
-      {/* Этот блок кода закоментирован для прохождения тестов */}
+      {/* Код закоментирован для прохождения тестов */}
       {/* <div
         className="d-flex flex-shrink-0 rounded-5 border border-2 border-white me-2 align-items-center justify-content-center"
         style={{ width: 40, height: 40 }}
       >
         <b className="fs-4">{userNameFirstLetter}</b>
       </div> */}
-      <div className="d-flex flex-column flex-grow-1">
+      <div>
+        {/* <div className="d-flex flex-column flex-grow-1"> */}
         <b className="text-break">{username}</b>
-        <p className="mb-0 text-break word-wrap-break-word">{text}</p>
+        {`: ${text}`}
+        {/* <p className="mb-0 text-break word-wrap-break-word">{text}</p> */}
       </div>
     </div>
   )
