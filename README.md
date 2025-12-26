@@ -49,22 +49,11 @@ cd frontend-project-12/frontend
 npm ci
 ```
 
-## ⚡️ Quick Start
+## 🏁 Quick Start
 
-Требуется Node.js 18+.
-
-```bash
-# Установка зависимостей
-npm ci
-
-# Режим разработки (http://localhost:5002)
-npm run dev
-
-# Сборка проекта
-npm run build
-
-# Локальный просмотр собранной версии
-npm run preview
+```bash 
+make install
+make develop 
 ```
 
 ## 🧱 Project Architecture
@@ -147,13 +136,6 @@ npm run preview
 - **Локализация**: автоматическое определение языка браузера, переключение между русским и английским
 - **Мониторинг**: интеграция с Rollbar для отслеживания ошибок в продакшене
 - **Прокси**: Vite проксирует запросы к API и WebSocket для разработки
-
-## 📜 Scripts
-
-- `npm run dev` — запуск Vite dev сервера (порт 5002)
-- `npm run build` — сборка проекта для продакшена
-- `npm run preview` — локальный просмотр собранной версии
-- `npm run lint` — проверка кода линтером
 
 ## 📄 License
 
