@@ -47,7 +47,8 @@ const MessageTextarea = ({ channel }) => {
             }}
             name="textarea"
             aria-label="Новое сообщение"
-            as="textarea"
+            //as='textarea'
+            as="input"
             rows="5"
             className="w-100 border border-0 bg-dark-subtle "
             placeholder={t('chat.messagePlaceholder', {
