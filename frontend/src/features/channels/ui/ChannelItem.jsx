@@ -16,6 +16,7 @@ const ChannelItem = ({ channel, ref }) => {
       ref={ref}
     >
       <Nav.Link
+        as="div"
         eventKey={channel.id}
         className="d-flex p-1 border-0 rounded-0"
         style={{ '--bs-nav-pills-link-active-bg': '#1a1d20' }}
@@ -33,7 +34,7 @@ const ChannelItem = ({ channel, ref }) => {
             <Dropdown
               as={ButtonGroup}
               className="flex-grow-0"
-              onClick={e => e.stopPropagation()}
+              onClick={(e) => e.stopPropagation()}
             >
               <Dropdown.Toggle
                 split
