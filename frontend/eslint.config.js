@@ -1,50 +1,33 @@
 import js from '@eslint/js'
 import globals from 'globals'
-import react from 'eslint-plugin-react'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import stylistic from '@stylistic/eslint-plugin'
+import pluginReact from 'eslint-plugin-react'
 import { defineConfig, globalIgnores } from 'eslint/config'
+import { includeIgnoreFile } from '@eslint/compat'
+import stylistic from '@stylistic/eslint-plugin'
+import { fileURLToPath } from 'url'
+
+const gitIgnorePath = fileURLToPath(new URL('.gitignore', import.meta.url))
 
 export default defineConfig([
   globalIgnores(['dist']),
+  includeIgnoreFile(gitIgnorePath),
+
+  stylistic.configs.recommended,
   {
-    files: ['**/*.{js,jsx}'],
-    plugins: {
-      react,
-      'react-hooks': reactHooks,
-      '@stylistic': stylistic, 
-    },
-    extends: [
-      js.configs.recommended,
-      react.configs.flat.recommended,
-      react.configs.flat['jsx-runtime'],
-    ],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
-      parserOptions: {
-        ecmaVersion: 'latest',
-        ecmaFeatures: { jsx: true },
-        sourceType: 'module',
-      },
-    },
+    files: ['**/*.{js,mjs,cjs,jsx}'],
+    plugins: { js },
+    extends: ['js/recommended'],
+  },
+  {
+    files: ['**/*.{js,mjs,cjs,jsx}'],
+    languageOptions: { globals: globals.browser },
+  },
+  pluginReact.configs.flat.recommended,
+  {
     rules: {
-      'no-unused-vars': ['error', { 
-        varsIgnorePattern: '^[A-Z_]',
-        argsIgnorePattern: '^_',
-      }],
-      'react/prop-types': 'off',
-      'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn',
-      '@stylistic/semi': ['error', 'never'],
-    },
-    settings: {
-      react: {
-        version: 'detect',
-      },
+      'react/prop-types': [0],
+      'react/react-in-jsx-scope': 0,
+      'react/jsx-uses-react': 0,
     },
   },
-  // Отдельный конфиг для react-refresh (Vite HMR)
-  reactRefresh.configs.vite,
 ])
