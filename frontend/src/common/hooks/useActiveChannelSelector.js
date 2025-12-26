@@ -9,7 +9,7 @@ export const useActiveChannelSelector = (channelId) => {
   const { setCurrentChannelId } = useChannelId()
 
   const selectedChannel = useMemo(() => {
-    return channels.find((channel) => channel.id === channelId)
+    return channels.find(channel => channel.id === channelId)
   }, [channels, channelId])
 
   useEffect(() => {

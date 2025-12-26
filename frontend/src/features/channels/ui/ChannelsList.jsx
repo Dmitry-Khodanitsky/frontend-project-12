@@ -21,7 +21,7 @@ export const ChannelsList = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
-  //хуки и обработчики для работы с модальным окном добавления каналов через slice
+  // хуки и обработчики для работы с модальным окном добавления каналов через slice
   const handleOpen = () =>
     dispatch(openModal({ type: 'addChannel', extra: null }))
 
@@ -38,34 +38,39 @@ export const ChannelsList = () => {
     >
       <div className="d-flex align-items-center justify-content-between bg-dark-subtle p-3 shadow">
         <b>{t('chat.channelsTitle')}</b>
-        <ShowModalButton onClick={handleOpen} text={'+'} />
+        <ShowModalButton onClick={handleOpen} text="+" />
       </div>
 
-      {isLoading ? (
-        <Loader />
-      ) : isError ? (
-        <ErrorMessage message={t('error.channels')} />
-      ) : (
-        <div className="flex-grow-1 overflow-auto">
-          <Nav
-            as="ul"
-            variant="pills"
-            className="flex-column flex-grow-1 overflow-auto"
-          >
-            {channels.map((channel) => {
-              const ref =
-                channel.id === activeChannelId ? activeChannelRef : null
-              return (
-                <ChannelItem
-                  key={channel.id}
-                  channel={channel}
-                  ref={ref}
-                ></ChannelItem>
-              )
-            })}
-          </Nav>
-        </div>
-      )}
+      {isLoading
+        ? (
+            <Loader />
+          )
+        : isError
+          ? (
+              <ErrorMessage message={t('error.channels')} />
+            )
+          : (
+              <div className="flex-grow-1 overflow-auto">
+                <Nav
+                  as="ul"
+                  variant="pills"
+                  className="flex-column flex-grow-1 overflow-auto"
+                >
+                  {channels.map((channel) => {
+                    const ref
+                      = channel.id === activeChannelId ? activeChannelRef : null
+                    return (
+                      <ChannelItem
+                        key={channel.id}
+                        channel={channel}
+                        ref={ref}
+                      >
+                      </ChannelItem>
+                    )
+                  })}
+                </Nav>
+              </div>
+            )}
       {/* Модальное окно для удаления канала */}
       <DeleteChannelModal />
       {/* Модальное окно для переименовывания канала  */}

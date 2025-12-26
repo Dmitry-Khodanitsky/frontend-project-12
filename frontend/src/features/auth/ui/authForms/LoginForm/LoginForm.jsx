@@ -31,7 +31,7 @@ export const LoginForm = () => {
         handleSubmit(values)
       }}
     >
-      {(errors) => (
+      {() => (
         <Form className="col-12 col-md-6 mt-3 mt-md-0">
           <h2 className="text-center mb-4">{t('auth.loginTitle')}</h2>
           <div className="form-floating mb-3">
@@ -42,7 +42,7 @@ export const LoginForm = () => {
               name="username"
               placeholder={t('common.placeholders.username')}
               className={`form-control ${isError ? 'is-invalid' : ''}`}
-            ></Field>
+            />
             <label htmlFor="username">
               {t('common.placeholders.username')}
             </label>
@@ -56,7 +56,7 @@ export const LoginForm = () => {
               type="password"
               placeholder={t('common.placeholders.password')}
               className={`form-control ${isError ? 'is-invalid' : ''}`}
-            ></Field>
+            />
             <label htmlFor="password">
               {t('common.placeholders.password')}
             </label>

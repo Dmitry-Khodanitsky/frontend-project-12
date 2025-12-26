@@ -2,7 +2,7 @@ import { baseApi } from '@/app/api/baseApi'
 import { setCredentials } from '../../model/authSlice'
 
 export const loginApi = baseApi.injectEndpoints({
-  endpoints: (builder) => ({
+  endpoints: builder => ({
     login: builder.mutation({
       query: ({ username, password }) => ({
         url: `login`,
@@ -16,9 +16,10 @@ export const loginApi = baseApi.injectEndpoints({
             setCredentials({
               token: data.token,
               username: data.username,
-            })
+            }),
           )
-        } catch (err) {
+        }
+        catch (err) {
           console.error('Login failed:', err)
         }
       },

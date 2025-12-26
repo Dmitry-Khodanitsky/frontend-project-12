@@ -8,10 +8,10 @@ export const ChannelForm = ({ handleSubmit, children, initialValue = '' }) => {
   const { data: channels } = useGetChannelsQuery()
   const { t } = useTranslation()
   // оборачиваем функцию в useMemo чтобы результат ее вычисления пересчитывался только при изменении channels
-  //передаем channels для поиска дубликатов названий каналов
+  // передаем channels для поиска дубликатов названий каналов
   const channelSchema = useMemo(
     () => getChannelsValidationSchema(channels || [], t),
-    [channels, t]
+    [channels, t],
   )
   return (
     <Formik
@@ -35,9 +35,9 @@ export const ChannelForm = ({ handleSubmit, children, initialValue = '' }) => {
               name="name"
               placeholder={t('common.placeholders.channelName')}
               className={`form-control ${errors.name ? 'is-invalid' : ''} mb-3`}
-              //Тут используется ручное управление формой и вызов обработчика событий
+              // Тут используется ручное управление формой и вызов обработчика событий
               onChange={(e) => {
-                //обработчик ввода
+                // обработчик ввода
                 handleChange(e)
                 // Сброс ошибки при вводе нового значения
                 if (errors.name) {

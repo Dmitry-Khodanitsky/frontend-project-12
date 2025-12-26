@@ -1,13 +1,13 @@
 import { Nav, Dropdown, ButtonGroup, Button } from 'react-bootstrap'
 import { ChannelDropdown } from './ChannelDropdown'
-import { useState } from 'react'
+// import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useChannelId } from '@/common/hooks'
 
 const ChannelItem = ({ channel, ref }) => {
   // закоментированные строки кода для прохождения тестов.
   // для прохождения теста элемент управления каналом должен быть виден всегда, а не при наведении мышки на канал
-  //const [isHovered, setIsHovered] = useState(false)
+  // const [isHovered, setIsHovered] = useState(false)
   const { t } = useTranslation()
   const { setCurrentChannelId, activeChannelId } = useChannelId()
   const isActive = channel.id === activeChannelId
@@ -16,8 +16,8 @@ const ChannelItem = ({ channel, ref }) => {
     <Nav.Item as="li" className="w-100" ref={ref}>
       <ButtonGroup
         className="w-100"
-        //onMouseEnter={() => setIsHovered(true)}
-        //onMouseLeave={() => setIsHovered(false)}
+        // onMouseEnter={() => setIsHovered(true)}
+        // onMouseLeave={() => setIsHovered(false)}
       >
         <Button
           variant={isActive ? 'secondary' : 'none'}

@@ -19,7 +19,8 @@ export const DeleteChannelModal = () => {
       dispatch(closeModal())
 
       toast.success(t('notifications.success.removeChannel'))
-    } catch (err) {
+    }
+    catch (err) {
       toast.error(t('errors.removeChannel', { error: err.data }))
     }
   }
@@ -31,7 +32,7 @@ export const DeleteChannelModal = () => {
         title={t('modals.removeChannel.submit')}
         type="button"
         onClick={handleRemove}
-        variant='danger'
+        variant="danger"
       />
     </ModalWrapper>
   )

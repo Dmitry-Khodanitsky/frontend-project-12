@@ -4,7 +4,7 @@ import { useGetMessagesQuery } from '@/features/messages/api/messagesApi'
 export const useChannelMessages = (channelId) => {
   const { data: messages = [], isError, isLoading } = useGetMessagesQuery()
   const channelMessages = messages.filter(
-    (message) => String(message?.channelId) === String(channelId)
+    message => String(message?.channelId) === String(channelId),
   )
   return {
     channelMessages,
@@ -14,4 +14,4 @@ export const useChannelMessages = (channelId) => {
 }
 
 // Где используется:
-//В MessagesList для отрисовки сообщений активного канала
+// В MessagesList для отрисовки сообщений активного канала

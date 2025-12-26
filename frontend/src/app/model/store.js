@@ -10,7 +10,7 @@ const store = configureStore({
     auth: authReducer,
     ui: uiReducer,
   },
-  middleware: (getDefaultMiddleware) =>
+  middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(baseApi.middleware),
 })
 

@@ -6,7 +6,7 @@ export const getSocket = () => {
   if (!socket) {
     socket = io()
     socket.on('connect', () =>
-      console.log(`✅ Сокет работает, сокет id: ${socket.id}`)
+      console.log(`✅ Сокет работает, сокет id: ${socket.id}`),
     )
     socket.on('disconnect', () => console.log('❌ Сокет закрыт'))
   }

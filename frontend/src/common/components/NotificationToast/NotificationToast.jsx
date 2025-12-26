@@ -10,7 +10,7 @@ export const NotificationToast = ({ notifications, onRemove }) => {
       className="p-3"
       style={{ zIndex: 2000 }}
     >
-      {notifications.map((notification) => (
+      {notifications.map(notification => (
         <Toast
           key={notification.id}
           show

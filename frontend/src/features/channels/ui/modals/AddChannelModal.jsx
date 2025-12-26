@@ -26,7 +26,8 @@ export const AddChannelModal = () => {
       handleClose()
       setCurrentChannelId(channelId)
       toast.success(t('notifications.success.addChannel'))
-    } catch (err) {
+    }
+    catch (err) {
       toast.error(t('errors.addChannel', { error: err.data }))
     }
   }

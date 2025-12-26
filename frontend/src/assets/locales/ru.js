@@ -1,5 +1,3 @@
-import { Dropdown } from 'react-bootstrap'
-
 export default {
   translation: {
     // Общие элементы

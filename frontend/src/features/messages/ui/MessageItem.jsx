@@ -1,5 +1,5 @@
 const MessageItem = ({ username = '', text = '' }) => {
-  //const userNameFirstLetter = username ? username[0] : '?'
+  // const userNameFirstLetter = username ? username[0] : '?'
   {
     /* Код закоментирован для прохождения тестов */
   }
@@ -22,7 +22,9 @@ const MessageItem = ({ username = '', text = '' }) => {
 
   return (
     <div className="text-break mb-2">
-      <b>{username}</b>: {text}
+      <b>{username}</b>
+      :
+      {text}
     </div>
   )
 }

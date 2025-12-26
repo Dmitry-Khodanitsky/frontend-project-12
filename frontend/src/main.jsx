@@ -17,17 +17,16 @@ const rollbarConfig = {
 }
 
 createRoot(document.getElementById('root')).render(
-  // <StrictMode>
-  <RollbarProvider config={rollbarConfig}>
-    <ErrorBoundary>
-      <Provider store={store}>
-        <ToastContainer position="bottom-right" theme="dark" newestOnTop />
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </Provider>
-    </ErrorBoundary>
-  </RollbarProvider>
-
-  // </StrictMode>
+  <StrictMode>
+    <RollbarProvider config={rollbarConfig}>
+      <ErrorBoundary>
+        <Provider store={store}>
+          <ToastContainer position="bottom-right" theme="dark" newestOnTop />
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </Provider>
+      </ErrorBoundary>
+    </RollbarProvider>
+  </StrictMode>,
 )

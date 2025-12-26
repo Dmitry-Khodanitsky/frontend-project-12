@@ -21,7 +21,7 @@ export const MainPage = () => {
   // в параметры передаем skip: Если это поле равно true, RTK Query не будет выполнять сетевой запрос.
   const { data: channels } = useGetChannelsQuery(undefined, { skip: !token })
 
-  //Устаналвиваем активный канал после отрисовки
+  // Устаналвиваем активный канал после отрисовки
   useEffect(() => {
     // Если токен есть, каналы загружены, но активный канал еще не выбран
     if (channels?.length > 0 && !activeChannelId) {

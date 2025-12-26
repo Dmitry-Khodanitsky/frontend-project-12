@@ -11,7 +11,7 @@ export const getChannelsValidationSchema = (channels, t) => {
       .test('unique-name', t('errors.channelExist'), (channelName) => {
         if (!channelName) return true
         const isDuplicate = channels.some(
-          (channel) => channel.name.toLowerCase() === channelName.toLowerCase()
+          channel => channel.name.toLowerCase() === channelName.toLowerCase(),
         )
         return !isDuplicate
       }),

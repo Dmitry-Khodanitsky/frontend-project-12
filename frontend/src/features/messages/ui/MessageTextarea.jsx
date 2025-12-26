@@ -28,7 +28,8 @@ const MessageTextarea = ({ channel }) => {
         try {
           await sendMessage(newMessage).unwrap()
           resetForm()
-        } catch (err) {
+        }
+        catch (err) {
           toast.error(t('errors.sendingError', { error: err.data }))
         }
       }}
@@ -47,7 +48,7 @@ const MessageTextarea = ({ channel }) => {
             }}
             name="textarea"
             aria-label="Новое сообщение"
-            //as='textarea'
+            // as='textarea'
             as="input"
             rows="5"
             className="w-100 border border-0 bg-dark-subtle "
