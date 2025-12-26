@@ -2,7 +2,6 @@ import { Dropdown } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
 import { openModal } from '@/app/model/uiSlice'
 import { memo } from 'react'
-import { RenameChannelModal, DeleteChannelModal } from './modals/'
 import { useTranslation } from 'react-i18next'
 
 export const ChannelDropdown = memo(({ id }) => {

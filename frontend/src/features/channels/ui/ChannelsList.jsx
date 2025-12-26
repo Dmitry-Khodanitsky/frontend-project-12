@@ -41,31 +41,36 @@ export const ChannelsList = () => {
         <ShowModalButton onClick={handleOpen} text="＋" />
       </div>
 
-      {isLoading ? (
-        <Loader />
-      ) : isError ? (
-        <ErrorMessage message={t('error.channels')} />
-      ) : (
-        <div className="flex-grow-1 overflow-auto">
-          <Nav
-            as="ul"
-            variant="pills"
-            className="flex-column flex-grow-1 overflow-auto"
-          >
-            {channels.map((channel) => {
-              const ref =
-                channel.id === activeChannelId ? activeChannelRef : null
-              return (
-                <ChannelItem
-                  key={channel.id}
-                  channel={channel}
-                  ref={ref}
-                ></ChannelItem>
-              )
-            })}
-          </Nav>
-        </div>
-      )}
+      {isLoading
+        ? (
+            <Loader />
+          )
+        : isError
+          ? (
+              <ErrorMessage message={t('error.channels')} />
+            )
+          : (
+              <div className="flex-grow-1 overflow-auto">
+                <Nav
+                  as="ul"
+                  variant="pills"
+                  className="flex-column flex-grow-1 overflow-auto"
+                >
+                  {channels.map((channel) => {
+                    const ref
+                      = channel.id === activeChannelId ? activeChannelRef : null
+                    return (
+                      <ChannelItem
+                        key={channel.id}
+                        channel={channel}
+                        ref={ref}
+                      >
+                      </ChannelItem>
+                    )
+                  })}
+                </Nav>
+              </div>
+            )}
       <AddChannelModal />
       <DeleteChannelModal />
       <RenameChannelModal />
