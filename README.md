@@ -1,7 +1,3 @@
-### Hexlet tests and linter status:
-
-[![Actions Status](https://github.com/Dmitry-Khodanitsky/frontend-project-12/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Dmitry-Khodanitsky/frontend-project-12/actions)
-
 ## 💬 Chat Application (СВЯЗЬ 🤙 | INTOUCH 🤙 )
 
 Веб-приложение для обмена сообщениями в реальном времени, упрощенный аналог Slack, Mattermost. Пользователи могут создавать каналы, отправлять сообщения, управлять каналами (создание, переименование, удаление). Приложение использует WebSocket для мгновенной доставки сообщений и Redux для управления состоянием. Интерфейс построен на Bootstrap 5, локализация реализована через `i18next` (русский язык по умолчанию).
