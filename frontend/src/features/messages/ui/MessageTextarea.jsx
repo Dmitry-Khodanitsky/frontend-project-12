@@ -28,7 +28,8 @@ const MessageTextarea = ({ channel }) => {
         try {
           await sendMessage(newMessage).unwrap()
           resetForm()
-        } catch (err) {
+        }
+        catch (err) {
           toast.error(t('errors.sendingError', { error: err.data }))
         }
       }}

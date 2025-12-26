@@ -50,7 +50,8 @@ export const SignUpForm = () => {
               className={`form-control ${
                 errors.username && touched.username ? 'is-invalid' : ''
               }`}
-            ></Field>
+            >
+            </Field>
             {/* если есть ошибка валидации показываем табличку с сообщением об ошибке */}
             {errors.username && (
               <div className="invalid-tooltip">{errors.username}</div>
@@ -70,7 +71,8 @@ export const SignUpForm = () => {
               className={`form-control ${
                 errors.password && touched.password ? 'is-invalid' : ''
               }`}
-            ></Field>
+            >
+            </Field>
 
             {/* если есть ошибка валидации показываем табличку с сообщением об ошибке */}
             {errors.password && (
@@ -94,7 +96,8 @@ export const SignUpForm = () => {
                   ? 'is-invalid'
                   : ''
               }`}
-            ></Field>
+            >
+            </Field>
             {/* если есть ошибка валидации показываем табличку с сообщением об ошибке */}
             {errors.passwordConfirmation && (
               <div className="invalid-tooltip">

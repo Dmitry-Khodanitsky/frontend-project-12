@@ -1,6 +1,6 @@
-import { Button } from "react-bootstrap"
+import { Button } from 'react-bootstrap'
 
-export const ShowModalButton = ({onClick, text}) => {
+export const ShowModalButton = ({ onClick, text }) => {
   return (
     <Button
       type="button"

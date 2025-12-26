@@ -1,7 +1,9 @@
 import { Navigate } from 'react-router'
 import { selectToken } from '@/features/auth/model/authSlice'
+import { useGetChannelsQuery } from '@/features/channels/api/channelsApi'
 import { currentChannelId, setCurrentChannelId } from '@/app/model/uiSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
 import { Tab, Container } from 'react-bootstrap'
 import { ChannelsList } from '@/features/channels/'
 import { MessagesSection } from '@/features/messages/'
@@ -10,6 +12,20 @@ export const MainPage = () => {
   const token = useSelector(selectToken)
   const dispatch = useDispatch()
   const activeChannelId = useSelector(currentChannelId)
+
+  // Получаем список каналов для установки дефолтного
+  // в параметры передается undefined - потому что эндпоинт getChannels не принимает никаких параметров
+  // в параметры передаем skip: Если это поле равно true, RTK Query не будет выполнять сетевой запрос.
+  const { data: channels } = useGetChannelsQuery(undefined, { skip: !token })
+
+  // Устаналвиваем активный канал после отрисовки
+  useEffect(() => {
+    // Если токен есть, каналы загружены, но активный канал еще не выбран
+    if (channels?.length > 0 && !activeChannelId) {
+      const defaultChannelId = channels[0].id
+      dispatch(setCurrentChannelId(defaultChannelId))
+    }
+  }, [channels, activeChannelId, dispatch])
 
   const handleSelect = (id) => {
     dispatch(setCurrentChannelId(id))

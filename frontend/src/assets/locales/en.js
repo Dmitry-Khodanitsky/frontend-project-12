@@ -1,7 +1,6 @@
 export default {
   translation: {
     common: {
-      testName: 'Hexlet Chat',
       appName: 'CONNECTION 🤙',
       save: 'Save',
       cancel: 'Cancel',
@@ -36,7 +35,7 @@ export default {
     auth: {
       loginTitle: 'Login',
       registerTitle: 'Registration',
-      noAccount: "Don't have an account?",
+      noAccount: 'Don\'t have an account?',
       hasAccount: 'Already have an account?',
       confirmPassword: 'Confirm password',
     },

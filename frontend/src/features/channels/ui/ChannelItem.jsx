@@ -33,7 +33,7 @@ const ChannelItem = ({ channel, ref }) => {
             <Dropdown
               as={ButtonGroup}
               className="flex-grow-0"
-              onClick={(e) => e.stopPropagation()}
+              onClick={e => e.stopPropagation()}
             >
               <Dropdown.Toggle
                 split

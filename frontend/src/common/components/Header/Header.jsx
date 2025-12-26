@@ -12,7 +12,7 @@ export const Header = () => {
     <Navbar className="border-bottom">
       <div className="d-flex justify-content-between w-100 ps-3 pe-3">
         <Navbar.Brand href="/" className="d-none d-sm-flex">
-          {t('common.testName')}
+          {t('common.appName')}
         </Navbar.Brand>
 
         {token && <LogOutButton />}

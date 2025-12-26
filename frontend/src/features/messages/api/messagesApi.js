@@ -3,23 +3,23 @@ import { subscribeToEvent } from '@/common/services/socket/subscribeToEvent'
 import { profanityClean } from '@/common/services/profanity'
 
 export const messagesApi = baseApi.injectEndpoints({
-  endpoints: (builder) => ({
+  endpoints: builder => ({
     getMessages: builder.query({
       query: () => 'messages',
       providesTags: ['messages'],
-      //Слушатель сокетов для синхронизации кэша. Обновляет список каналов мгновенно, когда другие пользователи вносят изменения.
+      // Слушатель сокетов для синхронизации кэша. Обновляет список каналов мгновенно, когда другие пользователи вносят изменения.
       async onCacheEntryAdded(
         arg,
-        { updateCachedData, cacheDataLoaded, cacheEntryRemoved }
+        { updateCachedData, cacheDataLoaded, cacheEntryRemoved },
       ) {
         try {
           // Сначала ждем завершения обработки первоначального запроса при монтировании компонента
           await cacheDataLoaded
 
           // Когда данные получены из соединения с сервером,
-          //Обновляем результат запроса полученным сообщением
+          // Обновляем результат запроса полученным сообщением
           const handleNewMessage = (payload) => {
-            //Просто добавляем новое сообщение в существующий массив в кэше
+            // Просто добавляем новое сообщение в существующий массив в кэше
             // RTK Query сам уведомит компоненты об изменениях
             updateCachedData((draft) => {
               const cleanMessage = {
@@ -32,16 +32,16 @@ export const messagesApi = baseApi.injectEndpoints({
 
           const handleRemoveMessage = (payload) => {
             updateCachedData((draft) => {
-              return draft.filter((draft) => draft.id !== payload.id)
+              return draft.filter(draft => draft.id !== payload.id)
             })
           }
           const unsubscribeNewMessage = subscribeToEvent(
             'newMessage',
-            handleNewMessage
+            handleNewMessage,
           )
           const unsubscribeRemoveMessage = subscribeToEvent(
             'removeMessage',
-            handleRemoveMessage
+            handleRemoveMessage,
           )
 
           // Когда компонент с чатом размонтируется (или данные станут не нужны),
@@ -49,21 +49,22 @@ export const messagesApi = baseApi.injectEndpoints({
           await cacheEntryRemoved
           unsubscribeNewMessage()
           unsubscribeRemoveMessage()
-        } catch (error) {
+        }
+        catch (error) {
           // Если HTTP запрос завершился ошибкой, подписка не создастся
           console.log(error)
         }
       },
     }),
     sendMessage: builder.mutation({
-      query: (message) => ({
+      query: message => ({
         url: 'messages',
         method: 'POST',
         body: { ...message, body: profanityClean(message.body) },
       }),
     }),
     removeMessage: builder.mutation({
-      query: (id) => ({
+      query: id => ({
         url: `messages/${id}`,
         method: 'DELETE',
       }),

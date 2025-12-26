@@ -16,11 +16,13 @@ export const SignUpPage = () => {
   return (
     <AuthWrapper
       form={<SignUpForm />}
-      footerLink={
+      footerLink={(
         <p>
-          {t('auth.hasAccount')} <a href="/login">{t('auth.loginTitle')}</a>
+          {t('auth.hasAccount')}
+          {' '}
+          <a href="/login">{t('auth.loginTitle')}</a>
         </p>
-      }
+      )}
     />
   )
 }

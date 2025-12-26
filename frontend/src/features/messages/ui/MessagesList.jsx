@@ -30,7 +30,7 @@ const MessagesList = ({ channelId }) => {
 
   return (
     <div style={{ minHeight: '100%' }}>
-      {channelMessages?.map((message) => (
+      {channelMessages?.map(message => (
         <MessageItem
           key={message.id}
           username={message.username}

@@ -13,7 +13,7 @@ export const RenameChannelModal = () => {
   const dispatch = useDispatch()
   const [renameChannel, { isLoading }] = useRenameChannelMutation()
 
-  //Получение имени канала, который хотим переименовать
+  // Получение имени канала, который хотим переименовать
   const channel = useChannelByIdSelector(extra?.id)
 
   const { t } = useTranslation()
@@ -27,7 +27,8 @@ export const RenameChannelModal = () => {
       await renameChannel({ id: extra.id, name: values.name }).unwrap()
       dispatch(closeModal())
       toast.success(t('notifications.success.renameChannel'))
-    } catch (err) {
+    }
+    catch (err) {
       toast.error(t('errors.renameChannel', { error: err.data }))
     }
   }

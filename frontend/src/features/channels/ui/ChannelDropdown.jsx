@@ -24,11 +24,6 @@ export const ChannelDropdown = memo(({ id }) => {
           {t('modals.removeChannel.submit')}
         </Dropdown.Item>
       </Dropdown.Menu>
-
-      {/* Модальное окно для удаления канала */}
-      <DeleteChannelModal />
-      {/* Модальное окно для переименовывания канала  */}
-      <RenameChannelModal />
     </>
   )
 })

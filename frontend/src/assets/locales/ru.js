@@ -1,10 +1,7 @@
-import { Dropdown } from 'react-bootstrap'
-
 export default {
   translation: {
     // Общие элементы
     common: {
-      testName: 'Hexlet Chat',
       appName: 'СВЯЗЬ 🤙',
       save: 'Сохранить',
       cancel: 'Отменить',
